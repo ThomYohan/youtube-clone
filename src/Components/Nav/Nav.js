@@ -6,7 +6,7 @@ class Nav extends Component {
         this.state = {
             showDrawer: false,
             showUpload: false,
-            userImage: ''
+            toggleSignIn: ''
         }
     }
     render(){
