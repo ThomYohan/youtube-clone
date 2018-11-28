@@ -43,8 +43,8 @@ module.exports = {
     },
     upload: (req, res) => {
         const dbInstance = req.app.get('db')
-        const { video_url, user_id, category, title, video_desc, thumbnail } = req.body
-        dbInstance.upload_video([video_url, user_id, category, title, video_desc, thumbnail])
+        const { url, user_id, category, title, video_desc, thumbnail } = req.body
+        dbInstance.upload_video([ url, user_id, category, title, video_desc, thumbnail ])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -81,4 +81,19 @@ module.exports = {
                 console.log(err)
             })
     },
+    viewCount: (req,res)=>{
+        const dbInstance = req.app.get('db')
+        const { id } = req.params
+        const vc = ''
+        dbInstance.get_viewcount([id])
+            .then((res) => {
+                if(res.view_count === null){vc = 1}
+                else {vc = res.view_count++}
+                dbInstance.increase_viewcount([id,vc])
+            })
+            .catch(err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
+                console.log(err)
+            })
+    }
 }
