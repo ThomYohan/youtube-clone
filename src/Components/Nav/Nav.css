@@ -1,6 +1,68 @@
 .nav{
     display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    height: 56px;
+    border: 1px solid green;
+    padding: 0 16px;
+}
+.hamburger{
+    border: none;
 }
 #icon {
     color: rebeccapurple;
+    font-size: 24px;
+}
+.search-button {
+    width: 65px;
+    border-radius: 0 2px 2px 0; 
+}
+#menu {
+    font-size: 19px;
+}
+.menu2 {
+    width: 40px;
+    height:40 px;
+    margin-right: 16px;
+}
+img {
+    padding-top: 3px;
+    width: 20px;
+    height: 20px;
+    /* padding: 1px 6px; */
+}
+.utube{
+    font-weight: bold;
+    font-size: 20px;
+}
+#search-field {
+    width: 526px;
+    height: 24px;
+}
+#youtube {
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+}
+::placeholder {
+    font-size: 16px;
+    padding-left: 5px;
+}
+.add-video{
+    border: none;
+}
+#search{
+    display: flex;
+    align-items: center;
+    margin: 0 60px;
+}
+#buttons{
+    display: flex;
+    align-items: center;
+}
+.sign-in{
+    border: none;
+    color: yellowgreen;
+    font-weight: bold;
+    font-size: 14.5px;
 }
