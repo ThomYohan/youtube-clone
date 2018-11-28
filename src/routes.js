@@ -7,8 +7,8 @@ import { Route, Switch } from 'react-router-dom';
 
 export default (
     <Switch>
-        {/* <Route exact path='/' component={Home}/>
-        <Route path='/channel' component={Channel}/>
+        {/* <Route exact path='/' component={Home}/> */}
+        {/* <Route path='/channel' component={Channel}/>
         <Route path='/search' component={Search}/>
         <Route path='/video' component={Video}/> */}
     </Switch>

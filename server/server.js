@@ -5,6 +5,7 @@ const axios = require('axios');
 const massive = require('massive');
 const bodyParser = require('body-parser');
 const aws = require('aws-sdk');
+const controller = require('./controller');
 
 const app = express();
 
@@ -99,4 +100,4 @@ app.get('/api/signs3', (req, res) => {
   });
 
 
-app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`))
+app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
