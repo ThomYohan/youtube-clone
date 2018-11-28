@@ -4,6 +4,7 @@ const session = require('express-session');
 const axios = require('axios');
 const massive = require('massive');
 const bodyParser = require('body-parser');
+const aws = require('aws-sdk');
 const controller = require('./controller');
 
 const app = express();
@@ -17,7 +18,11 @@ const {
     CLIENT_SECRET,
     CONNECTION_STRING,
     SECRET,
-    AUTH_PROTOCAL
+    AUTH_PROTOCAL,
+    AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY,
+    AWS_REGION,
+    S3_BUCKET
 } = process.env;
 
 massive(CONNECTION_STRING).then(db => app.set('db', db))
@@ -60,7 +65,39 @@ app.get('/auth/callback', async (req, res) => {
         req.session.user = createdCust[0]
     }
     res.redirect('/#/')
-})
+});
+
+app.get('/api/signs3', (req, res) => {
+    aws.config = {
+      region: AWS_REGION,
+      accessKeyId: AWS_ACCESS_KEY_ID,
+      secretAccessKey: AWS_SECRET_ACCESS_KEY
+    };
+  
+    const s3 = new aws.S3();
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3Params = {
+      Bucket: S3_BUCKET,
+      Key: fileName,
+      Expires: 60,
+      ContentType: fileType,
+      ACL: 'public-read',
+    };
+  
+    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.end();
+      }
+      const returnData = {
+        signedRequest: data,
+        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+      };
+  
+      return res.send(returnData);
+    });
+  });
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
