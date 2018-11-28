@@ -4,6 +4,7 @@ const session = require('express-session');
 const axios = require('axios');
 const massive = require('massive');
 const bodyParser = require('body-parser');
+const controller = require('./controller');
 
 const app = express();
 
