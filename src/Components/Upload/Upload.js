@@ -46,8 +46,9 @@ class Upload extends Component {
     axios
       .put(signedRequest, file, options)
       .then(response => {
+
+        console.log(response)
         this.setState({ isUploading: false, url });
-        
       })
       .catch(err => {
         this.setState({
