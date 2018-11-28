@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Nav.css'
 
 
 class Nav extends Component {
@@ -17,7 +18,19 @@ class Nav extends Component {
 
                 </div>
                 <div>
-                    <i className="fab fa-youtube"></i>
+                    <i id="icon" class="fab fa-youtube"></i>
+                </div>
+                <div>
+                    <h3>YouTube-Clone</h3>
+                </div>
+                <div>
+                    <input type="text"/>
+                </div>
+                <div>
+
+                </div>
+                <div>
+                    <button>Login</button>
                 </div>
             </div>
         )
