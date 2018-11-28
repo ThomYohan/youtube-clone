@@ -44,7 +44,7 @@ module.exports = {
     upload: (req, res) => {
         const dbInstance = req.app.get('db')
         const { video_url, user_id, category, title, video_desc, thumbnail } = req.body
-        dbInstance.upload_video([video_url, category, title, video_desc, thumbnail])
+        dbInstance.upload_video([video_url, user_id, category, title, video_desc, thumbnail])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -71,7 +71,7 @@ module.exports = {
                 console.log(err)
             })
     },
-    deleteComment: (req,res)=>{
+    deleteComment: (req, res) => {
         const dbInstance = req.app.get('db')
         const { comment_id, user_id } = req.params
         dbInstance.delete_comment([id])
