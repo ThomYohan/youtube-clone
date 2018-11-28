@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class Nav extends Component {
     constructor(){
         super()
@@ -12,7 +13,12 @@ class Nav extends Component {
     render(){
         return(
             <div className='nav'>
+                <div>
 
+                </div>
+                <div>
+                    <i className="fab fa-youtube"></i>
+                </div>
             </div>
         )
     }
