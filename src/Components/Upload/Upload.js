@@ -12,9 +12,9 @@ class Upload extends Component {
       isUploading: false,
       url: 'http://via.placeholder.com/450x450',
       user_id: 1,
-      category: 'sports',
-      title: "JAWS Challenge in Hawaii",
-      video_desc: "Large waves batter contestants",
+      category: 'music',
+      title: "test music",
+      video_desc: "some songs for you",
       thumbnail: 'thumbnails.jpg'
     };
   }
