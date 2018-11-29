@@ -12,9 +12,9 @@ class Upload extends Component {
       isUploading: false,
       url: 'http://via.placeholder.com/450x450',
       user_id: 1,
-      category: 'music',
-      title: 'hope this works',
-      video_desc: 'can we save video url to database',
+      category: 'sports',
+      title: "JAWS Challenge in Hawaii",
+      video_desc: "Large waves batter contestants",
       thumbnail: 'thumbnails.jpg'
     };
   }
