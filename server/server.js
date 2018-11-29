@@ -103,5 +103,6 @@ app.post('/api/upload',controller.upload)
 
 
 
+app.post('/api/upload', controller.upload)
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
