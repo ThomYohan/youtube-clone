@@ -58,7 +58,7 @@ app.get('/auth/callback', async (req, res) => {
         let lastName = userName[1]
     // check if that user already exists in our db
     const db = app.get('db');
-    let foundCustomer = await db.find_customer([sub]);
+    let foundCustomer = await db.find_user([sub]);
     if (foundCustomer[0]) {
         // found user existing in the db, put user on session
         req.session.user = foundCustomer[0];
