@@ -99,9 +99,6 @@ app.get('/api/signs3', (req, res) => {
     });
 });
 
-app.post('/api/upload',controller.upload)
-
-
 
 app.post('/api/upload', controller.upload)
 
