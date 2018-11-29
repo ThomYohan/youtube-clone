@@ -99,6 +99,11 @@ app.get('/api/signs3', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+app.get('/api/video-categories', controller.getVidoesByCategory)
+app.get('/api/by-view', controller.getVidoesByViews)
+=======
+>>>>>>> master
 
 app.post('/api/upload', controller.upload)
 
