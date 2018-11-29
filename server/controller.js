@@ -1,22 +1,22 @@
 module.exports = {
-    createUser: (req, res) => {
-        const userName = req.body.name
-        userName = userName.split(' ')
-        let firstName = userName[0]
-        let lastName = userName[1]
-        const dbInstance = req.app.get('db')
-        const { email, picture, sub } = req.body
-        dbInstance.create_user([firstName, lastName, sub, picture, email, channelName])
-            .then(() => res.sendStatus(200))
-            .catch(err => {
-                res.status(500).send({ errormessage: 'Something went wrong' })
-                console.log(err)
-            })
-    },
+    // createUser: (req, res) => {
+    //     const userName = req.body.name
+    //     userName = userName.split(' ')
+    //     let firstName = userName[0]
+    //     let lastName = userName[1]
+    //     const db = req.app.get('db')
+    //     const { email, picture, sub } = req.body
+    //     db.create_user([firstName, lastName, sub, picture, email])
+    //         .then(() => res.sendStatus(200))
+    //         .catch(err => {
+    //             res.status(500).send({ errormessage: 'Something went wrong' })
+    //             console.log(err)
+    //         })
+    // },
     getOne: (req, res) => {
-        const dbInstance = req.app.get('db')
+        const db = req.app.get('db')
         const { id } = req.params
-        dbInstance.get_video(id)
+        db.get_video(id)
             .then((product) => res.status(200).send(product))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -24,8 +24,8 @@ module.exports = {
             })
     },
     getVidoesByViews: (req, res) => {
-        const dbInstance = req.app.get('db')
-        dbInstance.get_videos_by_views()
+        const db = req.app.get('db')
+        db.get_videos_by_views()
             .then(product => res.status(200).send(product))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -33,8 +33,9 @@ module.exports = {
             })
     },
     getVidoesByCategory: (req, res) => {
-        const dbInstance = req.app.get('db')
-        dbInstance.get_videos_by_category()
+        const db = req.app.get('db')
+        const {category} = req.body
+        db.get_videos_by_category(category)
             .then(product => res.status(200).send(product))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -42,9 +43,9 @@ module.exports = {
             })
     },
     upload: (req, res) => {
-        const dbInstance = req.app.get('db')
+        const db = req.app.get('db')
         const { url, user_id, category, title, video_desc, thumbnail } = req.body
-        dbInstance.upload_video([ url, user_id, category, title, video_desc, thumbnail ])
+        db.upload_video([ url, user_id, category, title, video_desc, thumbnail ])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -52,9 +53,10 @@ module.exports = {
             })
     },
     like_dislike: (req, res) => {
-        const dbInstance = req.app.get('db')
-        const { id } = req.params
-        dbInstance.update_product([id])
+        const db = req.app.get('db')
+        const { video_id } = req.params
+        const {sub} = req.sessions.user
+        db.update_like([video_id])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -62,9 +64,9 @@ module.exports = {
             })
     },
     delete: (req, res) => {
-        const dbInstance = req.app.get('db')
-        const { id } = req.params
-        dbInstance.delete_video([id])
+        const db = req.app.get('db')
+        const { video_id } = req.params
+        db.delete_video([video_id])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -72,9 +74,9 @@ module.exports = {
             })
     },
     deleteComment: (req, res) => {
-        const dbInstance = req.app.get('db')
+        const db = req.app.get('db')
         const { comment_id, user_id } = req.params
-        dbInstance.delete_comment([id])
+        db.delete_comment([id])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -82,14 +84,14 @@ module.exports = {
             })
     },
     viewCount: (req,res)=>{
-        const dbInstance = req.app.get('db')
-        const { id } = req.params
+        const db = req.app.get('db')
+        const { video_id } = req.params
         const vc = ''
-        dbInstance.get_viewcount([id])
+        db.get_viewcount([video_id])
             .then((res) => {
                 if(res.view_count === null){vc = 1}
                 else {vc = res.view_count++}
-                dbInstance.increase_viewcount([id,vc])
+                db.increase_viewcount([id,vc])
             })
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
