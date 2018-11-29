@@ -99,5 +99,6 @@ app.get('/api/signs3', (req, res) => {
     });
   });
 
+app.post('/api/upload', controller.upload)
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 

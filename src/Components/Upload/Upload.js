@@ -11,6 +11,11 @@ class Upload extends Component {
     this.state = {
       isUploading: false,
       url: 'http://via.placeholder.com/450x450',
+      user_id: 1,
+      category: 'music',
+      title: 'hope this works',
+      video_desc: 'can we save video url to database',
+      thumbnail: 'thumbnails.jpg'
     };
   }
 
@@ -46,9 +51,13 @@ class Upload extends Component {
     axios
       .put(signedRequest, file, options)
       .then(response => {
-
         console.log(response)
         this.setState({ isUploading: false, url });
+        console.log(url)
+        let {user_id, category, title, video_desc, thumbnail} = this.state
+        axios.post('/api/upload', {url, user_id, category, title, video_desc, thumbnail})
+            .then( () => console.log('successfully saved video info to db'))
+            .catch( err => console.log(err))
       })
       .catch(err => {
         this.setState({

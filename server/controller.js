@@ -41,11 +41,10 @@ module.exports = {
                 console.log(err)
             })
     },
-    update: (req, res) => {
+    upload: (req, res) => {
         const dbInstance = req.app.get('db')
-        const { id } = req.params
-        const { desc } = req.query
-        dbInstance.update_product([id, desc])
+        const { url, user_id, category, title, video_desc, thumbnail } = req.body
+        dbInstance.upload_video([ url, user_id, category, title, video_desc, thumbnail ])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
