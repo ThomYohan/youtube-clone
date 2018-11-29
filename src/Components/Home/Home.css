@@ -1,0 +1,47 @@
+.videoz > h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+#vid-author {
+    font-size: .8rem;
+    font-weight: 400;
+    line-height: 1.8rem;
+    text-transform: none;
+    color: grey;
+}
+#view-count{
+    font-size: .8rem;
+    font-weight: 400;
+    line-height: .4rem;
+    text-transform: none;
+    color: grey;
+}
+video {
+    width: 210px;
+    height: 117px;
+}
+.Home {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+.recommended {
+    position: relative;
+    right: 472px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.video-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 87vw;
+    border-bottom: 1px grey solid;
+}
+.videoz {
+    width: 20%;
+    margin-bottom: 20px;
+}
