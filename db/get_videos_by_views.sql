@@ -1,4 +1,5 @@
 SELECT *
 FROM video
+WHERE view_count IS NOT NULL
 ORDER BY view_count DESC
 LIMIT 10;

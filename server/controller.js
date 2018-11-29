@@ -2,7 +2,7 @@ module.exports = {
     getOne: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.params
-        db.get_video(id)
+        db.get_video([id])
             .then((product) => res.status(200).send(product))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
