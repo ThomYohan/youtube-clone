@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './Nav.css'
+import pic from './icons8-search-24.png'
+import pic2 from './add video.svg'
 
 
 class Nav extends Component {
@@ -14,24 +16,37 @@ class Nav extends Component {
     render(){
         return(
             <div className='nav'>
-                <div>
-
+                <div className="menu2">
+                    <button className="hamburger"><i id="menu" class="fas fa-bars"></i></button>
                 </div>
+
+        <div id="youtube">
                 <div>
                     <i id="icon" class="fab fa-youtube"></i>
                 </div>
                 <div>
-                    <h3>YouTube-Clone</h3>
+                    <h3 className="utube">U-Tube</h3>
                 </div>
-                <div>
-                    <input type="text"/>
-                </div>
-                <div>
+        </div>
 
+        <div id="search">
+                <div>
+                    <input id="search-field" type="text" placeholder="Search"/>
                 </div>
                 <div>
-                    <button>Login</button>
+                   <button className="search-button"><img src={pic} alt=""/></button>
                 </div>
+        </div>
+
+        <div id="buttons">
+                <div>
+                    <button className="add-video"><img src={pic2} alt=""/></button>
+                </div>
+                <div>
+                    <button className="sign-in">SIGN IN</button>
+                </div>
+        </div>       
+
             </div>
         )
     }
