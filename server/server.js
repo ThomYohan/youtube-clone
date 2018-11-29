@@ -97,7 +97,10 @@ app.get('/api/signs3', (req, res) => {
   
       return res.send(returnData);
     });
-  });
+});
+
+app.get('/api/video-categories', controller.getVidoesByCategory)
+app.get('/api/by-view', controller.getVidoesByViews)
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
