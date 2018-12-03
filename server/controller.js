@@ -2,15 +2,8 @@ module.exports = {
     getOne: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.params
-<<<<<<< HEAD
-        dbInstance.get_video([id])
-            .then((product) => {
-                console.log(product)
-                res.status(200).send(product)})
-=======
         db.get_video([id])
             .then((product) => res.status(200).send(product))
->>>>>>> master
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
