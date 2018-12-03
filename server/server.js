@@ -101,8 +101,6 @@ app.get('/api/signs3', (req, res) => {
     });
 });
 
-app.get('/api/video/:id',controller.getOne)
-app.post('/api/upload',controller.upload)
 
 
 app.get('/api/video-categories', controller.getVidoesByCategory)
