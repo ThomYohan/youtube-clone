@@ -20,12 +20,13 @@ module.exports = {
     },
     getVidoesByCategory: (req, res) => {
         const db = req.app.get('db')
-        const { category } = req.body
-        db.get_videos_by_category(category)
-            .then(product => res.status(200).send(product))
+        const { category } = req.params
+        db.get_videos_by_category([category])
+            .then(videos => {
+                res.status(200).send(videos)})
+          
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
-                console.log(err)
             })
     },
     upload: (req, res) => {
