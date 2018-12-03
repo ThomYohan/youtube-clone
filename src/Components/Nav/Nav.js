@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Nav.css'
 import pic from './icons8-search-24.png'
 import pic2 from './add video.svg'
@@ -17,12 +18,12 @@ class Nav extends Component {
         return(
             <div className='nav'>
                 <div className="menu2">
-                    <button className="hamburger"><i id="menu" class="fas fa-bars"></i></button>
+                    <button className="hamburger"><i id="menu" className="fas fa-bars"></i></button>
                 </div>
 
         <div id="youtube">
                 <div>
-                    <i id="icon" class="fab fa-youtube"></i>
+                   <Link to='/'><i id="icon" className="fab fa-youtube"></i></Link> 
                 </div>
                 <div>
                     <h3 className="utube">U-Tube</h3>
