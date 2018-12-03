@@ -24,6 +24,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+button {
+	background: none;
+}
 body {
 	line-height: 1;
 }
@@ -45,3 +48,5 @@ table {
 /* .App {
 	font-family: 'Roboto', sans-serif;
 } */
+
+/* hi */
