@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Home.css';
+import {Link} from 'react-router-dom';
 
 class Home extends Component {
     constructor(){
@@ -22,7 +23,7 @@ class Home extends Component {
         let videosDisplay = this.state.videos.map((video, i) => {
             return (
                 <div className="videoz">
-                    <video src={video.video_url}></video>
+                    <Link to={`/video/${video.video_id}`}><video src={video.video_url}></video></Link>
                     <h4>{video.title}</h4>
                     <p id="vid-author">Author</p>
                     <p id="view-count">{video.view_count} views</p>
@@ -44,3 +45,4 @@ class Home extends Component {
 }
 
 export default Home;
+// fixing stuff

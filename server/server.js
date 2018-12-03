@@ -108,7 +108,7 @@ app.post('/api/upload',controller.upload)
 
 app.get('/api/video-categories', controller.getVidoesByCategory)
 app.get('/api/by-view', controller.getVidoesByViews)
-
+app.get('/api/video/:id', controller.getOne)
 app.post('/api/upload', controller.upload)
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 

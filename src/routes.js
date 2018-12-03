@@ -11,7 +11,7 @@ export default (
         <Route exact path='/' component={Home}/>
         <Route path='/channel' component={Channel}/>
         <Route path='/search' component={Search}/>
-        <Route path='/video' component={Video}/>
+        <Route path='/video/:id' component={Video}/>
         <Route path='/upload' component={Upload}/>
     </Switch>
 )
