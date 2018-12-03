@@ -20,8 +20,8 @@ module.exports = {
     },
     getVidoesByCategory: (req, res) => {
         const db = req.app.get('db')
-        const { category } = req.params
-        db.get_videos_by_category([category])
+        const { category, id} = req.params
+        db.get_videos_by_category([category, id])
             .then(videos => {
                 res.status(200).send(videos)})
           

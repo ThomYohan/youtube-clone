@@ -2,14 +2,14 @@
     display: flex;
 }
 .vid{
-    width: 713px;
+    width: 763px;
     height: 401px;
 }
 .player{
     margin-left: 24px;
     padding: 24px 0 0 24px;
     /* border: 1px solid purple; */
-    width: 738px;
+    width: 770px;
     height: 100vh;
 }
 #titulo {
@@ -46,14 +46,14 @@
 }
 .category-list {
     height: 100vh;
-    width: 500px;
+    width: 436px;
     border: 1px solid red;
-    margin: 24px 24px 0 0;
+    margin: 24px 0 0 24px;
 }
 .suggested-list {
     display: flex;
     height: 145px;
-    width: 100%;
+    width: 95%;
     padding-bottom: 8px;
     margin-bottom: 16px;
     border: 1px solid blue;
