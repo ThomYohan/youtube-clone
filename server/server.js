@@ -53,15 +53,18 @@ app.get('/auth/callback', async (req, res) => {
     let userRes = await axios.get(`https://${REACT_APP_DOMAIN}/userinfo?access_token=${tokenRes.data.access_token}`)
 
     let { email, picture, sub, name } = userRes.data;
+    let userName = name.split(' ')
+        let firstName = userName[0]
+        let lastName = userName[1]
     // check if that user already exists in our db
     const db = app.get('db');
-    let foundCustomer = await db.find_customer([sub]);
+    let foundCustomer = await db.find_user([sub]);
     if (foundCustomer[0]) {
         // found user existing in the db, put user on session
         req.session.user = foundCustomer[0];
     } else {
         // no user found by google id. create user in db
-        let createdCust = await db.create_customer([name, sub, picture, email])
+        let createdCust = await db.create_user([firstName, lastName, sub, picture, email])
         req.session.user = createdCust[0]
     }
     res.redirect('/#/')
@@ -98,6 +101,10 @@ app.get('/api/signs3', (req, res) => {
         return res.send(returnData);
     });
 });
+
+app.get('/api/video/:id',controller.getOne)
+app.post('/api/upload',controller.upload)
+
 
 app.get('/api/video-categories', controller.getVidoesByCategory)
 app.get('/api/by-view', controller.getVidoesByViews)
