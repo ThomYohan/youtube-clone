@@ -13,7 +13,7 @@ class Upload extends Component {
       url: 'http://via.placeholder.com/450x450',
       user_id: 1,
       category: 'music',
-      title: "test music",
+      title: "test music 4 - halsey",
       video_desc: "some songs for you",
       thumbnail: 'thumbnails.jpg'
     };

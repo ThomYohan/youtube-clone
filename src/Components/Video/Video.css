@@ -1,0 +1,43 @@
+.vid{
+    width: 713px;
+    height: 401px;
+}
+.player{
+    margin-left: 24px;
+    padding: 24px 0 0 24px;
+    /* border: 1px solid purple; */
+    width: 738px;
+    height: 100vh;
+}
+#titulo {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px 8px 0 0;
+}
+.views-n-likes {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* border: 1px solid green; */
+}
+.likes {
+    display: flex;
+}
+.likebox {
+    display: flex;
+    align-items: center;
+    color: grey;
+}
+.dislikebox {
+    display: flex;
+    align-items: center;
+    color: grey;
+    
+}
+#like-button{
+    border: none;
+    
+}
+#dislike-button{
+    border: none;
+}

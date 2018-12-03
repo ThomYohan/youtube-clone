@@ -1,22 +1,8 @@
 module.exports = {
-    // createUser: (req, res) => {
-    //     const userName = req.body.name
-    //     userName = userName.split(' ')
-    //     let firstName = userName[0]
-    //     let lastName = userName[1]
-    //     const db = req.app.get('db')
-    //     const { email, picture, sub } = req.body
-    //     db.create_user([firstName, lastName, sub, picture, email])
-    //         .then(() => res.sendStatus(200))
-    //         .catch(err => {
-    //             res.status(500).send({ errormessage: 'Something went wrong' })
-    //             console.log(err)
-    //         })
-    // },
     getOne: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.params
-        db.get_video(id)
+        db.get_video([id])
             .then((product) => res.status(200).send(product))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -34,7 +20,7 @@ module.exports = {
     },
     getVidoesByCategory: (req, res) => {
         const db = req.app.get('db')
-        const {category} = req.body
+        const { category } = req.body
         db.get_videos_by_category(category)
             .then(product => res.status(200).send(product))
             .catch(err => {
@@ -45,23 +31,41 @@ module.exports = {
     upload: (req, res) => {
         const db = req.app.get('db')
         const { url, user_id, category, title, video_desc, thumbnail } = req.body
-        db.upload_video([ url, user_id, category, title, video_desc, thumbnail ])
+        db.upload_video([url, user_id, category, title, video_desc, thumbnail])
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
             })
     },
-    like_dislike: (req, res) => {
+    like_dislike: async (req, res) => {
         const db = req.app.get('db')
-        const { video_id } = req.params
-        const {sub} = req.sessions.user
-        db.update_like([video_id])
-            .then(() => res.sendStatus(200))
-            .catch(err => {
-                res.status(500).send({ errorMessage: "Something went wrong" })
-                console.log(err)
-            })
+        const { video_id, likeDislike } = req.body
+        const { user_id } = req.sessions.user
+        let like = await db.get_likes([video_id, user_id])
+        if (like === []) {
+            db.create_like([video_id, user_id, likeDislike])
+                .then(() => res.sendStatus(200))
+                .catch(err => {
+                    res.status(500).send({ errorMessage: "Something went wrong" })
+                    console.log(err)
+                })
+        }
+        else if (like[0].liked === likeDislike) {
+            db.delete_like([video_id,user_id]).then(() => res.sendStatus(200))
+                .catch(err => {
+                    res.status(500).send({ errorMessage: "Something went wrong" })
+                    console.log(err)
+                })
+        }
+        else {
+            db.update_like([video_id, user_id, likeDislike])
+                .then(() => res.sendStatus(200))
+                .catch(err => {
+                    res.status(500).send({ errorMessage: "Something went wrong" })
+                    console.log(err)
+                })
+        }
     },
     delete: (req, res) => {
         const db = req.app.get('db')
@@ -83,15 +87,15 @@ module.exports = {
                 console.log(err)
             })
     },
-    viewCount: (req,res)=>{
+    viewCount: (req, res) => {
         const db = req.app.get('db')
         const { video_id } = req.params
         const vc = ''
         db.get_viewcount([video_id])
             .then((res) => {
-                if(res.view_count === null){vc = 1}
-                else {vc = res.view_count++}
-                db.increase_viewcount([id,vc])
+                if (res.view_count === null) { vc = 1 }
+                else { vc = res.view_count++ }
+                db.increase_viewcount([id, vc])
             })
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
