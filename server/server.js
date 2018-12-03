@@ -101,11 +101,17 @@ app.get('/api/signs3', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+app.get('/api/video/:id',controller.getOne)
+app.get('/api/video-categories', controller.getVidoesByCategory)
+=======
 
 
 app.get('/api/video-categories/:category', controller.getVidoesByCategory)
+>>>>>>> master
 app.get('/api/by-view', controller.getVidoesByViews)
 app.get('/api/video/:id', controller.getOne)
 app.post('/api/upload', controller.upload)
+app.get('/api/comments/:video_id', controller.getComments)
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
