@@ -24,6 +24,12 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+button {
+	background: none;
+}
+button:hover {
+	cursor: pointer;
+}
 body {
 	line-height: 1;
 }
@@ -42,6 +48,6 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/* .App {
+.App {
 	font-family: 'Roboto', sans-serif;
-} */
+}

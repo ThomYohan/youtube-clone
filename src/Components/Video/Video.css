@@ -1,12 +1,15 @@
+.Video {
+    display: flex;
+}
 .vid{
-    width: 713px;
+    width: 763px;
     height: 401px;
 }
 .player{
     margin-left: 24px;
     padding: 24px 0 0 24px;
     /* border: 1px solid purple; */
-    width: 738px;
+    width: 770px;
     height: 100vh;
 }
 #titulo {
@@ -40,4 +43,29 @@
 }
 #dislike-button{
     border: none;
+}
+.category-list {
+    height: 100vh;
+    width: 436px;
+    border: 1px solid red;
+    margin: 24px 0 0 24px;
+}
+.suggested-list {
+    display: flex;
+    height: 145px;
+    width: 95%;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    border: 1px solid blue;
+}
+.suggested-list>video {
+    height: 117px;
+    width: 210px;
+}
+.category-desc {
+    height: 117px;
+    width: 250px;
+    padding-right: 24px;
+    margin-left: 5px;
+    border: 1px solid purple;
 }

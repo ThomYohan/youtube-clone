@@ -3,7 +3,7 @@ module.exports = {
         const db = req.app.get('db')
         const { id } = req.params
         db.get_video([id])
-            .then((product) => res.status(200).send(product))
+            .then((video) => res.status(200).send(video))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
@@ -12,7 +12,7 @@ module.exports = {
     getVidoesByViews: (req, res) => {
         const db = req.app.get('db')
         db.get_videos_by_views()
-            .then(product => res.status(200).send(product))
+            .then(videos => res.status(200).send(videos))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
@@ -20,12 +20,13 @@ module.exports = {
     },
     getVidoesByCategory: (req, res) => {
         const db = req.app.get('db')
-        const { category } = req.body
-        db.get_videos_by_category(category)
-            .then(product => res.status(200).send(product))
+        const { category, id} = req.params
+        db.get_videos_by_category([category, id])
+            .then(videos => {
+                res.status(200).send(videos)})
+          
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
-                console.log(err)
             })
     },
     upload: (req, res) => {
@@ -33,6 +34,28 @@ module.exports = {
         const { url, user_id, category, title, video_desc, thumbnail } = req.body
         db.upload_video([url, user_id, category, title, video_desc, thumbnail])
             .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
+                console.log(err)
+            })
+    },
+    getLikes:(req,res)=>{
+        const db = req.app.get('db')
+        const { video_id } = req.params
+        console.log(req.params)
+        db.get_like([video_id])
+            .then((like) => res.status(200).send(like))
+            .catch(err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
+                console.log(err)
+            })
+    },
+    getDislikes:(req,res)=>{
+        const db = req.app.get('db')
+        const { video_id } = req.params
+        console.log(req.params)
+        db.get_dislike([video_id])
+            .then((dislike) => res.status(200).send(dislike))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
@@ -52,7 +75,7 @@ module.exports = {
                 })
         }
         else if (like[0].liked === likeDislike) {
-            db.delete_like([video_id,user_id]).then(() => res.sendStatus(200))
+            db.delete_like([video_id, user_id]).then(() => res.sendStatus(200))
                 .catch(err => {
                     res.status(500).send({ errorMessage: "Something went wrong" })
                     console.log(err)
@@ -67,7 +90,7 @@ module.exports = {
                 })
         }
     },
-    delete: (req, res) => {
+    deleteVideo: (req, res) => {
         const db = req.app.get('db')
         const { video_id } = req.params
         db.delete_video([video_id])
@@ -77,9 +100,20 @@ module.exports = {
                 console.log(err)
             })
     },
+    getComments: (req,res) => {
+        const db = req.app.get('db')
+        const { video_id } = req.params
+        console.log(req.params)
+        db.get_comments([video_id])
+            .then((comments) => res.status(200).send(comments))
+            .catch(err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
+                console.log(err)
+            })
+    },
     deleteComment: (req, res) => {
         const db = req.app.get('db')
-        const { comment_id, user_id } = req.params
+        const { comment_id, user_id } = req.body
         db.delete_comment([id])
             .then(() => res.sendStatus(200))
             .catch(err => {
