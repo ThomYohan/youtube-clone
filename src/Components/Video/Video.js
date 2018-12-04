@@ -10,12 +10,16 @@ class Video extends Component {
         super()
         this.state = {
             videos: [],
-            showVid: {}
+            showVid: {},
+            likeCount: 0,
+            dislikeCount: 0
         }
     }
 
     componentDidMount() {
         this.getVideo()
+        this.getLikes()
+        this.getDislikes()
     }
 
     componentDidUpdate(prevProps){
@@ -36,6 +40,41 @@ class Video extends Component {
                     videos: res.data
                 })
             })
+        })
+    }
+
+    getLikes = () => {
+        console.log(this.props.match.params.id)
+        axios.get(`/api/get-likes/${this.props.match.params.id}`).then(res => {
+            this.setState({
+                likeCount: res.data[0].count
+            })
+        })
+    }
+
+    getDislikes = () => {
+        axios.get(`/api/get-dislikes/${this.props.match.params.id}`).then(res => {
+            console.log(res.data)
+            this.setState({
+                dislikeCount: res.data[0].count
+            })
+        })
+    }
+
+    likeVideo = () => {
+        let video_id = this.props.match.params.id
+        let likeDislike = true
+        console.log(video_id)
+        axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+            this.getLikes()
+        })
+    }
+
+    dislikeVideo = () => {
+        let video_id = this.props.match.params.id
+        let likeDislike = false
+        axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+           this.getDislikes()
         })
     }
 
@@ -65,12 +104,12 @@ class Video extends Component {
                         <span><p>{this.state.showVid.view_count} views</p></span>
                         <div className="likes">
                             <div className="likebox">
-                                <button id="like-button"><img src={pic2} alt="" /></button>
-                                <p>15</p>
+                                <button onClick={this.likeVideo} id="like-button"><img src={pic2} alt="" /></button>
+                                <p>{this.state.likeCount}</p>
                             </div>
                             <div className="dislikebox">
-                                <button id="dislike-button"><img src={pic} alt="" /></button>
-                                <p>4</p>
+                                <button onClick={this.dislikeVideo} id="dislike-button"><img src={pic} alt="" /></button>
+                                <p>{this.state.dislikeCount}</p>
                             </div>
                         </div>
                     </div>
