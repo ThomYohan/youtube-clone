@@ -21,32 +21,35 @@ class Nav extends Component {
                     <button className="hamburger"><i id="menu" className="fas fa-bars"></i></button>
                 </div>
 
-        <div id="youtube">
-                <div>
-                   <Link to='/'><i id="icon" className="fab fa-youtube"></i></Link> 
+                <div id="youtube">
+                    <div>
+                    <Link to='/'><i id="icon" className="fab fa-youtube"></i></Link> 
+                    </div>
+                    <div>
+                        <h3 className="utube">U-Tube</h3>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="utube">U-Tube</h3>
-                </div>
-        </div>
 
-        <div id="search">
-                <div>
-                    <input id="search-field" type="text" placeholder="Search"/>
+                <div id="search">
+                    <div>
+                        <input id="search-field" type="text" placeholder="Search"/>
+                    </div>
+                    <div>
+                    <button className="search-button"><img src={pic} alt=""/></button>
+                    </div>
                 </div>
-                <div>
-                   <button className="search-button"><img src={pic} alt=""/></button>
-                </div>
-        </div>
 
-        <div id="buttons">
-                <div>
-                    <button className="add-video"><img src={pic2} alt=""/></button>
-                </div>
-                <div>
-                    <button className="sign-in">SIGN IN</button>
-                </div>
-        </div>       
+                <div id="buttons">
+                    <div>
+                        <Link to='/upload'>
+                        <button className="add-video">
+                        <img src={pic2} alt=""/></button>
+                        </Link>
+                    </div>
+                    <div>
+                        <button className="sign-in">SIGN IN</button>
+                    </div>
+                </div>       
 
             </div>
         )

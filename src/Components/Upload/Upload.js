@@ -4,14 +4,14 @@ import axios from 'axios';
 import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
-import uTubeUpload from '../../images/uTubeUpload.png';
+import uTubeUpload3 from '../../images/uTubeUpload3.png';
 
 class Upload extends Component {
   constructor() {
     super();
     this.state = {
       isUploading: false,
-      url: 'http://via.placeholder.com/450x450',
+      url: '',
       user_id: 1,
       category: '',
       title: "",
@@ -93,9 +93,7 @@ class Upload extends Component {
     const { url, isUploading } = this.state;
     return (
       <div className="upload-page">
-        <h1>Upload</h1>
-        <h1>{url}</h1>
-        <video src={url} alt="" width="450px"/>
+        <video src={url} alt="video_preview" controls/>
 
         <div className="upload-area">
           <Dropzone
@@ -104,11 +102,10 @@ class Upload extends Component {
               position: 'relative',
               width: '40vw',
               height: '30vh',
-              borderWidth: 7,
-              margin: 10,
-              borderColor: 'rgb(102, 102, 102)',
-              borderStyle: 'dashed',
-              borderRadius: 5,
+              borderWidth: 3,
+              margin: 0,
+              borderColor: 'rgb(175, 175, 175)',
+              borderRadius: 15,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -119,29 +116,26 @@ class Upload extends Component {
             >
             {isUploading ? <GridLoader /> : 
               <div className='upload-box'>
-                <img src={uTubeUpload} />
+                <img id='upload-icon' src={uTubeUpload3} alt='u tube upload' />
                 <p>Select file to upload</p>
               </div>}
           </Dropzone>
         </div>
 
-        <form onSubmit={this.submitVideo}>
-          <label>
-            Category
-            <select required name="category" onChange={this.handleInput}>
-              <option value="" disabled selected>Select one</option>
-              <option value="music">Music</option>
-              <option value="sports">Sports</option>
-              <option value="gaming">Gaming</option>
-              <option value="movies">Movies</option>
-              <option value="tv-shows">TV Shows</option>
-              <option value="news">News</option>
-              <option value="other">Other</option>          
-            </select>
-          </label>
-          <input required type="text" placeholder="Title..." name="title" onChange={this.handleInput} />
-          <textarea type="text" placeholder="Description..." name="video_desc" onChange={this.handleInput} />
-          <input type="submit" value="Submit" />
+        <form className='upload-form' onSubmit={this.submitVideo}>
+          <select required name="category" className='category' onChange={this.handleInput}>
+            <option value="" disabled selected>Select a category</option>
+            <option value="music">Music</option>
+            <option value="sports">Sports</option>
+            <option value="gaming">Gaming</option>
+            <option value="movies">Movies</option>
+            <option value="tv-shows">TV Shows</option>
+            <option value="news">News</option>
+            <option value="other">Other</option>          
+          </select>
+          <input required type="text" placeholder="Title..." name="title" onChange={this.handleInput} className='title' />
+          <textarea type="text" placeholder="Description..." name="video_desc" className='description' onChange={this.handleInput} />
+          <input className='submit' type="submit" value="Submit" />
         </form>
       </div>
     );
