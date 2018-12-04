@@ -103,8 +103,7 @@ app.get('/api/signs3', (req, res) => {
 });
 
 
-app.get('/api/userinfo', controller.getUser)
-app.get('/api/video-categories', controller.getVidoesByCategory)
+// app.get('/api/userinfo', controller.getUser)
 
 // organize endpoints by request type
 app.get('/api/video-categories/:category/:id', controller.getVidoesByCategory)
