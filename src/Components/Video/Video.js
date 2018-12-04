@@ -24,7 +24,6 @@ class Video extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
-            // window.location.reload()
             this.getVideo()
         }
     }
@@ -85,7 +84,7 @@ class Video extends Component {
         let categoryList = this.state.videos.map((list, i) => {
             return (
                 <div className='suggested-list' key={i}>
-                    <Link to={`/video/${list.video_id}`}><video src={list.video_url}></video></Link>
+                    <Link to={`/video/${list.video_id}`}><video id="thumbnail" src={list.video_url}></video></Link>
                     <div className='category-desc'>
                         <h4>{list.title}</h4>
                         <p>Author</p>

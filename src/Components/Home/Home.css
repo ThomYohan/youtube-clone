@@ -46,3 +46,6 @@ video {
     width: 20%;
     margin-bottom: 20px;
 }
+#thumbnail {
+    background: black;
+}
