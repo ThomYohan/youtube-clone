@@ -23,7 +23,7 @@ class Home extends Component {
         let videosDisplay = this.state.videos.map((video, i) => {
             return (
                 <div className="videoz" key={i}>
-                    <Link to={`/video/${video.video_id}`}><video src={video.video_url}></video></Link>
+                    <Link to={`/video/${video.video_id}`}><video id="thumbnail" src={video.video_url}></video></Link>
                     <h4>{video.title}</h4>
                     <p id="vid-author">Author</p>
                     <p id="view-count">{video.view_count} views</p>

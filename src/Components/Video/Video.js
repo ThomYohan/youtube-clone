@@ -3,7 +3,9 @@ import axios from 'axios';
 import './Video.css';
 import pic from './icons8-facebook-dislike-24.svg';
 import pic2 from './icons8-facebook-like-24.png';
+import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
+
 
 class Video extends Component {
     constructor() {
@@ -24,7 +26,6 @@ class Video extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
-            // window.location.reload()
             this.getVideo()
         }
     }
@@ -88,7 +89,7 @@ class Video extends Component {
         let categoryList = this.state.videos.map((list, i) => {
             return (
                 <div className='suggested-list' key={i}>
-                    <Link to={`/video/${list.video_id}`}><video src={list.video_url}></video></Link>
+                    <Link to={`/video/${list.video_id}`}><video id="thumbnail" src={list.video_url}></video></Link>
                     <div className='category-desc'>
                         <h4>{list.title}</h4>
                         <p>Author</p>
@@ -120,6 +121,7 @@ class Video extends Component {
                 <div className='category-list'>
                     {categoryList}
                 </div>
+                <Comments video_id={this.props.match.params.id}/>
             </div>
         )
     }

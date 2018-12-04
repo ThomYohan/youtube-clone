@@ -39,7 +39,7 @@ module.exports = {
                 console.log(err)
             })
     },
-    getLikes:(req,res)=>{
+    getLikes: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.params
         db.get_like_count([id])
@@ -49,7 +49,7 @@ module.exports = {
                 console.log(err)
             })
     },
-    getDislikes:(req,res)=>{
+    getDislikes: (req, res) => {
         const db = req.app.get('db')
         const { id } = req.params
         db.get_dislike_count([id])
@@ -101,7 +101,7 @@ module.exports = {
                 console.log(err)
             })
     },
-    getComments: (req,res) => {
+    getComments: (req, res) => {
         const db = req.app.get('db')
         const { video_id } = req.params
         console.log(req.params)
@@ -136,5 +136,11 @@ module.exports = {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
             })
+    },
+    getUser: (req, res) => {
+        res.status(200).send(req.session.user).catch(err => {
+            res.status(500).send({ errorMessage: "Something went wrong" })
+            console.log(err)
+        })
     }
 }
