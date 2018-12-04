@@ -27,6 +27,9 @@ footer, header, hgroup, menu, nav, section {
 button {
 	background: none;
 }
+button:hover {
+	cursor: pointer;
+}
 body {
 	line-height: 1;
 }

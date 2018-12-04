@@ -30,7 +30,8 @@ video {
 }
 .recommended {
     position: relative;
-    right: 472px;
+    /* right: 472px; */
+    left: -472px;
     margin-bottom: 20px;
     font-weight: bold;
     font-size: 18px;
@@ -44,4 +45,7 @@ video {
 .videoz {
     width: 20%;
     margin-bottom: 20px;
+}
+#thumbnail {
+    background: black;
 }
