@@ -1,41 +1,57 @@
 import React, { Component } from 'react';
-import './Comments.css'
+import './Comments.css';
+import axios from 'axios'
 
 
 class Comments extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             userInfo: {},
-            comments: {},
+            comments: [],
             writeComment: false
         }
     }
-    componentDidMount(){
-        axios.get(`/api/comments/${video_id}`).then(res => {
+    componentDidMount() {
+        axios.get(`/api/comments/${this.props.video_id}`).then(res => {
             this.setState({
                 comments: res.data
             })
         })
+        axios.get(`/api/userinfo`).then(res=>{
+            this.setState({
+                userInfo: res.data
+            })
+        })
     }
-    render(){
-        return(
-            <div className='comments'>
+    render() {
+        let commentsDisplay = this.state.comments.map((comment, i) => {
+            return (<div key={i}>
                 <div>
-                    <h1>Comments: </h1>
+                    <div><img src={comment.user_img}></img></div>
                 </div>
                 <div>
-                    <input>
+                    <div>{comment.first_name} {comment.last_name}</div>
+                    <div>{comment.comment}</div>
+                </div>
+            </div>)
+        })
 
-                    </input>
+        return (
+            <div className='comments'>
+                <div>
+                    <h1>Comments: {this.state.comments.length}</h1>
+                </div>
+                <div>
+                    <img src={this.state.userInfo.picture}></img>
                     <input placeholder='Add a public comment...'></input>
                 </div>
                 <div>
-
+                    {commentsDisplay}
                 </div>
             </div>
         )
     }
 }
 
-export default Nav;
+export default Comments;

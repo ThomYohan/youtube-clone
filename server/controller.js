@@ -39,22 +39,20 @@ module.exports = {
                 console.log(err)
             })
     },
-    getLikes:(req,res)=>{
+    getLikes: (req, res) => {
         const db = req.app.get('db')
-        const { video_id } = req.params
-        console.log(req.params)
-        db.get_like([video_id])
+        const { id } = req.params
+        db.get_like_count([id])
             .then((like) => res.status(200).send(like))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
             })
     },
-    getDislikes:(req,res)=>{
+    getDislikes: (req, res) => {
         const db = req.app.get('db')
-        const { video_id } = req.params
-        console.log(req.params)
-        db.get_dislike([video_id])
+        const { id } = req.params
+        db.get_dislike_count([id])
             .then((dislike) => res.status(200).send(dislike))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
@@ -64,10 +62,13 @@ module.exports = {
     like_dislike: async (req, res) => {
         const db = req.app.get('db')
         const { video_id, likeDislike } = req.body
-        const { user_id } = req.sessions.user
-        let like = await db.get_likes([video_id, user_id])
-        if (like === []) {
-            db.create_like([video_id, user_id, likeDislike])
+        let video = +video_id
+        // const { user_id } = req.session.user
+        //delete hardcoded user_id after auth implementation
+        let user_id = 1
+        let like = await db.get_likes([video, user_id])
+        if (like[0] === undefined) {
+            db.create_like([video, user_id, likeDislike])
                 .then(() => res.sendStatus(200))
                 .catch(err => {
                     res.status(500).send({ errorMessage: "Something went wrong" })
@@ -75,14 +76,14 @@ module.exports = {
                 })
         }
         else if (like[0].liked === likeDislike) {
-            db.delete_like([video_id, user_id]).then(() => res.sendStatus(200))
+            db.delete_like([video, user_id]).then(() => res.sendStatus(200))
                 .catch(err => {
                     res.status(500).send({ errorMessage: "Something went wrong" })
                     console.log(err)
                 })
         }
         else {
-            db.update_like([video_id, user_id, likeDislike])
+            db.update_like([video, user_id, likeDislike])
                 .then(() => res.sendStatus(200))
                 .catch(err => {
                     res.status(500).send({ errorMessage: "Something went wrong" })
@@ -100,7 +101,7 @@ module.exports = {
                 console.log(err)
             })
     },
-    getComments: (req,res) => {
+    getComments: (req, res) => {
         const db = req.app.get('db')
         const { video_id } = req.params
         console.log(req.params)
@@ -135,5 +136,11 @@ module.exports = {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
             })
+    },
+    getUser: (req, res) => {
+        res.status(200).send(req.session.user).catch(err => {
+            res.status(500).send({ errorMessage: "Something went wrong" })
+            console.log(err)
+        })
     }
 }
