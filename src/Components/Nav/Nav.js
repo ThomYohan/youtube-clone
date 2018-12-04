@@ -14,6 +14,15 @@ class Nav extends Component {
             toggleSignIn: ''
         }
     }
+
+    signIn(){
+        let {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
+        
+        let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
+
+        window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
+    }
+
     render(){
         return(
             <div className='nav'>
@@ -47,7 +56,7 @@ class Nav extends Component {
                         </Link>
                     </div>
                     <div>
-                        <button className="sign-in">SIGN IN</button>
+                        <button onClick={() => this.signIn()} className="sign-in">SIGN IN</button>
                     </div>
                 </div>       
 

@@ -137,10 +137,20 @@ module.exports = {
                 console.log(err) 
             })
     },
-    getUser: (req, res) => {res =>
-        res.status(200).send(req.session.user).catch(err => {
-            res.status(500).send({ errorMessage: "Something went wrong" })
-            console.log(err)
-        })
+    getUser: (req, res) => {
+            res.send(req.session.user)
+    },
+    searchVideos: (req, res) => {
+        const db = req.app.get('db')
+        let {searchString} = req.body
+
+        const query = `SELECT * FROM video WHERE title ILIKE '%${searchString}%' OR category ILIKE '%${searchString}%' ORDER BY view_count DESC`
+        db.query(query)
+            .then( (videos) => {
+                res.status(200).send(videos)
+            })
+            .catch( err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
+            })
     }
 }
