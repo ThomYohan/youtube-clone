@@ -102,7 +102,7 @@ app.get('/api/signs3', (req, res) => {
     });
 });
 
-
+app.get('/api/search', controller.searchVideos)
 app.get('/api/userinfo', controller.getUser)
 app.get('/api/video-categories', controller.getVidoesByCategory)
 
