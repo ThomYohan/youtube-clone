@@ -13,18 +13,29 @@ class Comments extends Component {
         }
     }
     componentDidMount() {
-        axios.get(`/api/comments/${this.props.video_id}`).then(res => {
-            this.setState({
-                comments: res.data
-            })
-        })
+        console.log('getting comments')
+        this.getComments()
         axios.get(`/api/userinfo`).then(res=>{
             this.setState({
                 userInfo: res.data
             })
         })
     }
+    componentDidUpdate(prevProps, prevState){
+        if(prevProps.video_id !== this.props.video_id){
+            this.getComments()
+        }
+    }
+    getComments = () => {
+        axios.get(`/api/comments/${this.props.video_id}`).then(res => {
+            this.setState({
+                comments: res.data
+            })
+        })
+    }
+
     render() {
+        console.log(11, this.props)
         let commentsDisplay = this.state.comments.map((comment, i) => {
             return (<div key={i}>
                 <div>

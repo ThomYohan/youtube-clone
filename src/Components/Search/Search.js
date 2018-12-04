@@ -10,8 +10,8 @@ class Search extends Component {
     }
 
     render(){
-        //filter
-        //map
+        //filter?
+        //map?
         return(
             <div>
 
