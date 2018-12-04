@@ -137,4 +137,10 @@ module.exports = {
                 console.log(err) 
             })
     },
+    getUser: (req, res) => {
+        res.status(200).send(req.session.user).catch(err => {
+            res.status(500).send({ errorMessage: "Something went wrong" })
+            console.log(err)
+        })
+    }
 }
