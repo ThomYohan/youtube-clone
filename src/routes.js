@@ -7,6 +7,7 @@ import Video from '../src/Components/Video/Video';
 import Upload from './Components/Upload/Upload';
 
 export default (
+    
     <Switch>
         <Route exact path='/' component={Home}/>
         <Route path='/channel' component={Channel}/>

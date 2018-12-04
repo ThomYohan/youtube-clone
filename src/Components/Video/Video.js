@@ -6,7 +6,6 @@ import pic2 from './icons8-facebook-like-24.png';
 import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
 
-
 class Video extends Component {
     constructor() {
         super()
@@ -68,6 +67,8 @@ class Video extends Component {
         console.log(video_id)
         axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
             this.getLikes()
+            this.getDislikes()
+
         })
     }
 
@@ -75,7 +76,8 @@ class Video extends Component {
         let video_id = this.props.match.params.id
         let likeDislike = false
         axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
-           this.getDislikes()
+            this.getLikes()
+            this.getDislikes()
         })
     }
 
@@ -114,11 +116,12 @@ class Video extends Component {
                             </div>
                         </div>
                     </div>
+                    <Comments video_id={this.props.match.params.id}/>
                 </div>
                 <div className='category-list'>
                     {categoryList}
                 </div>
-                <Comments video_id={this.props.match.params.id}/>
+                
             </div>
         )
     }
