@@ -3,7 +3,7 @@
 }
 .vid{
     width: 763px;
-    height: 401px;
+    height: 428px;
 }
 .player{
     margin-left: 24px;
@@ -68,4 +68,7 @@
     padding-right: 24px;
     margin-left: 5px;
     border: 1px solid purple;
+}
+.category-desc>h4{
+    font-weight: bold;
 }
