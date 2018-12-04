@@ -33,11 +33,13 @@ class Home extends Component {
 
         return(
             <div className="Home">
-                <div className="recommended">
-                    <h3>Recommended</h3>
-                </div>
-                <div className="video-container">
-                    {videosDisplay}
+                <div className="home-container">
+                    <div className="recommended">
+                        <h3>Recommended</h3>
+                    </div>
+                    <div className="video-container">
+                        {videosDisplay}
+                    </div>
                 </div>
             </div>
         )
