@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Video.css';
 import pic from './icons8-facebook-dislike-24.svg';
 import pic2 from './icons8-facebook-like-24.png';
+import Comments from '../Comments/Comments';
 
 class Video extends Component {
     constructor() {
@@ -65,6 +66,7 @@ class Video extends Component {
                 <div className='category-list'>
                     {categoryList}
                 </div>
+                <Comments video_id={this.props.match.params.id}/>
             </div>
         )
     }
