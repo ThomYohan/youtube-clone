@@ -67,6 +67,8 @@ class Video extends Component {
         console.log(video_id)
         axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
             this.getLikes()
+            this.getDislikes()
+
         })
     }
 
@@ -74,7 +76,8 @@ class Video extends Component {
         let video_id = this.props.match.params.id
         let likeDislike = false
         axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
-           this.getDislikes()
+            this.getLikes()
+            this.getDislikes()
         })
     }
 

@@ -132,9 +132,9 @@ module.exports = {
                 else { vc = res.view_count++ }
                 db.increase_viewcount([id, vc])
             })
-            .catch(err => {
+            .catch(err => { 
                 res.status(500).send({ errorMessage: "Something went wrong" })
-                console.log(err)
+                console.log(err) 
             })
     },
     getUser: (req, res) => {res =>
