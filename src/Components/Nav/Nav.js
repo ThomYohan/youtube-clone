@@ -11,8 +11,10 @@ class Nav extends Component {
         this.state = {
             showDrawer: false,
             showUpload: false,
-            toggleSignIn: ''
+            toggleSignIn: '',
+            searchString: ''
         }
+        this.handleInput = this.handleInput.bind(this)
     }
 
     signIn(){
@@ -21,6 +23,10 @@ class Nav extends Component {
         let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
 
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
+    }
+
+    handleInput(event){
+        this.setState({[event.target.name]: event.target.value})
     }
 
     render(){
@@ -41,10 +47,10 @@ class Nav extends Component {
 
                 <div id="search">
                     <div>
-                        <input id="search-field" type="text" placeholder="Search"/>
+                        <input id="search-field" type="text" name="searchString" placeholder="Search" onChange={this.handleInput}/>
                     </div>
                     <div>
-                    <button className="search-button"><img src={pic} alt=""/></button>
+                        <button className="search-button"><img src={pic} alt="search-button"/></button>
                     </div>
                 </div>
 
@@ -52,7 +58,7 @@ class Nav extends Component {
                     <div>
                         <Link to='/upload'>
                         <button className="add-video">
-                        <img src={pic2} alt=""/></button>
+                        <img src={pic2} alt="upload-button"/></button>
                         </Link>
                     </div>
                     <div>

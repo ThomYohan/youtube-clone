@@ -1,0 +1,47 @@
+.channel {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-banner-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 143px;
+    background-color: rgb(212, 212, 212);
+}
+
+.channel-banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    height: 143px;
+}
+
+.left-channel-banner {
+    display: flex;
+    flex-direction: row;
+}
+
+.name-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 30px;
+}
+
+.profile-image {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.user-name{
+    font-size: 1.5rem;
+}
+
+.channel-name {
+    font-size: 2.3rem;
+}

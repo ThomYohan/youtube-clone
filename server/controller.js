@@ -63,9 +63,8 @@ module.exports = {
         const db = req.app.get('db')
         const { video_id, likeDislike } = req.body
         let video = +video_id
-        // const { user_id } = req.session.user
-        //delete hardcoded user_id after auth implementation
-        let user_id = 1
+        const { user_id } = req.session
+        
         let like = await db.get_likes([video, user_id])
         if (like[0] === undefined) {
             db.create_like([video, user_id, likeDislike])

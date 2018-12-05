@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axiox from 'axios';
+// import axios from 'axios';
 
 class Search extends Component {
     constructor(){
@@ -10,6 +10,7 @@ class Search extends Component {
     }
 
     render(){
+        console.log(this.props.match.params)
         //filter
         //map
         return(
