@@ -3,22 +3,28 @@ import { Link } from 'react-router-dom';
 import './Nav.css'
 import pic from './icons8-search-24.png'
 import pic2 from './add video.svg'
+import axios from 'axios';
 
 
 class Nav extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             showDrawer: false,
             showUpload: false,
             toggleSignIn: '',
-            searchField: ''
+            searchField: '',
+            signedIn: false,
+            email: '',
+            firstName: '',
+            lastName: '',
+            image: ''
         }
     }
 
-    signIn(){
-        let {REACT_APP_DOMAIN, REACT_APP_CLIENT_ID} = process.env;
-        
+    signIn() {
+        let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
+
         let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
 
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
@@ -36,8 +42,25 @@ class Nav extends Component {
 
     // }
 
-    render(){
-        return(
+    componentDidMount() {
+        this.getUser()
+    }
+
+    getUser = () => {
+        axios.get('/api/userinfo').then(res => {
+            console.log(res)
+            this.setState({
+                signedIn: true,
+                email: res.data.email,
+                firstName: res.data.first_name,
+                lastName: res.data.last_name,
+                image: res.data.user_img
+            })
+        })
+    }
+
+    render() {
+        return (
             <div className='nav'>
                 <div className="menu2">
                     <button className="hamburger"><i id="menu" className="fas fa-bars"></i></button>
@@ -45,7 +68,7 @@ class Nav extends Component {
 
                 <div id="youtube">
                     <div>
-                    <Link to='/'><i id="icon" className="fab fa-youtube"></i></Link> 
+                        <Link to='/'><i id="icon" className="fab fa-youtube"></i></Link>
                     </div>
                     <div>
                         <h3 className="utube">U-Tube</h3>
@@ -64,14 +87,24 @@ class Nav extends Component {
                 <div id="buttons">
                     <div>
                         <Link to='/upload'>
-                        <button className="add-video">
-                        <img src={pic2} alt=""/></button>
+                            <button className="add-video">
+                                <img src={pic2} alt="" /></button>
                         </Link>
                     </div>
                     <div>
-                        <button onClick={() => this.signIn()} className="sign-in">SIGN IN</button>
+                        {
+                            this.state.signedIn
+                                ?
+                            <button className='user-btn'>
+                                <img className='user-image' src={this.state.image} alt="user" />
+                            </button>
+                                :
+                            <button onClick={() => this.signIn()} className="sign-in">
+                                SIGN IN
+                            </button>
+                        }
                     </div>
-                </div>       
+                </div>
 
             </div>
         )
@@ -79,3 +112,4 @@ class Nav extends Component {
 }
 
 export default Nav;
+

@@ -63,6 +63,14 @@ img {
     display: flex;
     align-items: center;
 }
+.user-btn {
+    border: none;
+}
+.user-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
 .sign-in{
     border: none;
     color: yellowgreen;
