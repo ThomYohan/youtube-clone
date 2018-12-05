@@ -102,8 +102,7 @@ app.get('/api/signs3', (req, res) => {
     });
 });
 
-app.get('/api/search', controller.searchVideos)
-app.get('/api/userinfo', controller.getUser)
+
 
 // organize endpoints by request type
 app.get('/api/video-categories/:category/:id', controller.getVidoesByCategory)
@@ -114,6 +113,10 @@ app.get('/api/comments/:video_id', controller.getComments)
 app.get('/api/get-likes/:id', controller.getLikes)
 app.get('/api/get-dislikes/:id', controller.getDislikes)
 app.post('/api/like-dislike', controller.like_dislike)
+app.post('/api/createcomment', controller.createComment)
+
+app.get('/api/search', controller.searchVideos)
+app.get('/api/userinfo', controller.getUser)
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
