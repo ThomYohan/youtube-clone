@@ -20,11 +20,12 @@ module.exports = {
     },
     getVidoesByCategory: (req, res) => {
         const db = req.app.get('db')
-        const { category, id} = req.params
+        const { category, id } = req.params
         db.get_videos_by_category([category, id])
             .then(videos => {
-                res.status(200).send(videos)})
-          
+                res.status(200).send(videos)
+            })
+
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
             })
@@ -99,6 +100,16 @@ module.exports = {
                 console.log(err)
             })
     },
+    createComment: (req, res) => {
+        const db = req.app.get('db')
+        const { video_id, comment, user_id } = req.body
+        db.create_comment([video_id, comment, user_id])
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
+                console.log(err)
+            })
+    },
     getComments: (req, res) => {
         const db = req.app.get('db')
         const { video_id } = req.params
@@ -129,24 +140,24 @@ module.exports = {
                 else { vc = res.view_count++ }
                 db.increase_viewcount([id, vc])
             })
-            .catch(err => { 
+            .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
-                console.log(err) 
+                console.log(err)
             })
     },
     getUser: (req, res) => {
-            res.send(req.session.user)
+        res.send(req.session.user)
     },
     searchVideos: (req, res) => {
         const db = req.app.get('db')
-        let {searchString} = req.body
+        let { searchString } = req.body
 
         const query = `SELECT * FROM video WHERE title ILIKE '%${searchString}%' OR category ILIKE '%${searchString}%' ORDER BY view_count DESC`
         db.query(query)
-            .then( (videos) => {
+            .then((videos) => {
                 res.status(200).send(videos)
             })
-            .catch( err => {
+            .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
             })
     }

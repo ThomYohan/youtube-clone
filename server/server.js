@@ -113,6 +113,7 @@ app.get('/api/comments/:video_id', controller.getComments)
 app.get('/api/get-likes/:id', controller.getLikes)
 app.get('/api/get-dislikes/:id', controller.getDislikes)
 app.post('/api/like-dislike', controller.like_dislike)
+app.post('/api/createcomment', controller.createComment)
 
 app.get('/api/search', controller.searchVideos)
 app.get('/api/userinfo', controller.getUser)
