@@ -37,8 +37,10 @@ img {
     font-size: 20px;
 }
 #search-field {
-    width: 526px;
-    height: 24px;
+    width: 536px;
+    height: 30px;
+    border-radius: 1px 0 0 1px;
+    border: 1px solid rgb(206, 206, 206);
 }
 #youtube {
     display: flex;
@@ -66,4 +68,5 @@ img {
     color: yellowgreen;
     font-weight: bold;
     font-size: 14.5px;
+    margin-left: 10px;
 }

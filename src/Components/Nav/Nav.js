@@ -11,7 +11,8 @@ class Nav extends Component {
         this.state = {
             showDrawer: false,
             showUpload: false,
-            toggleSignIn: ''
+            toggleSignIn: '',
+            searchField: ''
         }
     }
 
@@ -22,6 +23,18 @@ class Nav extends Component {
 
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
     }
+
+    
+    handleSearch = (e) => {
+        this.setState({
+            searchField: e.target.value
+        })
+        this.props.search(e.target.value)
+    }
+
+    // handleClick = () => {
+
+    // }
 
     render(){
         return(
@@ -41,10 +54,10 @@ class Nav extends Component {
 
                 <div id="search">
                     <div>
-                        <input id="search-field" type="text" placeholder="Search"/>
+                        <input id="search-field" value={this.state.searchField}  onChange={this.handleSearch} type="text" placeholder="Search"/>
                     </div>
                     <div>
-                    <button className="search-button"><img src={pic} alt=""/></button>
+                    <Link to='/search'><button className="search-button"><img src={pic} alt=""/></button></Link>
                     </div>
                 </div>
 

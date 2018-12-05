@@ -26,6 +26,8 @@ class Video extends Component {
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
             this.getVideo()
+            this.getLikes()
+            this.getDislikes()
         }
     }
 

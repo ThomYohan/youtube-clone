@@ -13,7 +13,6 @@ class Comments extends Component {
         }
     }
     componentDidMount() {
-        console.log('getting comments')
         this.getComments()
         axios.get(`/api/userinfo`).then(res=>{
             this.setState({
