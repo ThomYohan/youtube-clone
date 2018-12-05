@@ -102,7 +102,6 @@ module.exports = {
     getComments: (req, res) => {
         const db = req.app.get('db')
         const { video_id } = req.params
-        console.log(req.params)
         db.get_comments([video_id])
             .then((comments) => res.status(200).send(comments))
             .catch(err => {

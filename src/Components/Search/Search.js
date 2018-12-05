@@ -10,8 +10,9 @@ class Search extends Component {
     }
 
     render(){
-        //filter
-        //map
+        console.log(33, this.props.searchInput)
+        //filter?
+        //map?
         return(
             <div>
 
