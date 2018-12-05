@@ -36,7 +36,7 @@ class Comments extends Component {
         let commentsDisplay = this.state.comments.map((comment, i) => {
             return (<div key={i}>
                 <div>
-                    <div><img src={comment.user_img}></img></div>
+                    <div><img src={comment.user_img } alt="user"></img></div>
                 </div>
                 <div>
                     <div>{comment.first_name} {comment.last_name}</div>
@@ -61,6 +61,10 @@ class Comments extends Component {
             <div className='comments'>
                 <div>
                     <h1>Comments: {this.state.comments.length}</h1>
+                </div>
+                <div>
+                    <img src={this.state.userInfo.picture} alt='user'></img>
+                    <input placeholder='Add a public comment...'></input>
                 </div>
                     {comment}
                 <div>

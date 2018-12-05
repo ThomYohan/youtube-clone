@@ -38,7 +38,7 @@ img {
 }
 #search-field {
     width: 526px;
-    height: 24px;
+    height: 30px;
 }
 #youtube {
     display: flex;
@@ -60,6 +60,14 @@ img {
 #buttons{
     display: flex;
     align-items: center;
+}
+.user-btn {
+    border: none;
+}
+.user-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
 }
 .sign-in{
     border: none;
