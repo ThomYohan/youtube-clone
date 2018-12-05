@@ -16,7 +16,8 @@ class Nav extends Component {
             email: '',
             firstName: '',
             lastName: '',
-            image: ''
+            image: '',
+            showMenu: false
         }
     }
 
@@ -35,13 +36,25 @@ class Nav extends Component {
     getUser = () => {
         axios.get('/api/userinfo').then(res => {
             console.log(res)
-            this.setState({
-                signedIn: true,
-                email: res.data.email,
-                firstName: res.data.first_name,
-                lastName: res.data.last_name,
-                image: res.data.user_img
-            })
+            if (res.data !== '') {
+                this.setState({
+                    signedIn: true,
+                    email: res.data.email,
+                    firstName: res.data.first_name,
+                    lastName: res.data.last_name,
+                    image: res.data.user_img
+                })
+            } else {
+                this.setState({
+                    signedIn: false
+                })
+            }
+        })
+    }
+
+    toggleUserMenu = () => {
+        this.setState({
+            showMenu: !this.state.showMenu
         })
     }
 
@@ -81,17 +94,32 @@ class Nav extends Component {
                         {
                             this.state.signedIn
                                 ?
-                            <button className='user-btn'>
-                                <img className='user-image' src={this.state.image} alt="user" />
-                            </button>
+                                <div>
+                                    <button className='user-btn'>
+                                        <img onClick={() => this.toggleUserMenu()} className='user-image' src={this.state.image} alt="user" />
+                                    </button>
+                                    <div className='user-menu'>
+                                        <div className='user-account'>
+                                            <div className='user-image-container'><img className='menu-image' src={this.state.image} alt="" /></div>
+                                            <div className='user-account-text'>
+                                                <div className='user-name' >{this.state.firstName} {this.state.lastName}</div>
+                                                <div className='user-email' >{this.state.email}</div>
+                                            </div>
+                                        </div>
+                                        <div className='menu-channel'>My Channel</div>
+                                        <div className='menu-sign-out'>SIGN OUT</div>
+                                    </div>
+                                </div>
                                 :
-                            <button onClick={() => this.signIn()} className="sign-in">
-                                SIGN IN
+                                <button onClick={() => this.signIn()} className="sign-in">
+                                    SIGN IN
                             </button>
                         }
                     </div>
+                    <div>
+                        {this.state.firstName} {this.state.lastName}
+                    </div>
                 </div>
-
             </div>
         )
     }
