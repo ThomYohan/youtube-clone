@@ -9,7 +9,7 @@ class Comments extends Component {
         this.state = {
             userInfo: {},
             comments: [],
-            writeComment: false
+            commentInput: ''
         }
     }
     componentDidMount() {
@@ -18,11 +18,19 @@ class Comments extends Component {
                 comments: res.data
             })
         })
-        axios.get(`/api/userinfo`).then(res=>{
+        axios.get(`/api/userinfo`).then(res => {
             this.setState({
                 userInfo: res.data
             })
         })
+    }
+    handleCommentInput(e) {
+            this.setState({
+                commentInput: e.target.value
+            })
+    }
+    postComment(){
+        
     }
     render() {
         let commentsDisplay = this.state.comments.map((comment, i) => {
@@ -36,7 +44,19 @@ class Comments extends Component {
                 </div>
             </div>)
         })
-
+        let comment = <div/>
+         if (Object.keys(this.state.userInfo).length !== 0) {
+            comment = <div>
+                <img src={this.state.userInfo.picture}></img>
+                <input placeholder='Add a public comment...'></input>
+                <button onClick={(e) => this.handleCommentInput(e)}>Add Comment</button>
+            </div>
+        } 
+        else {
+            comment = <div>
+                <p>Please Login to post a comment.</p>
+            </div>
+        }
         return (
             <div className='comments'>
                 <div>
@@ -46,6 +66,7 @@ class Comments extends Component {
                     <img src={this.state.userInfo.picture} alt='user'></img>
                     <input placeholder='Add a public comment...'></input>
                 </div>
+                    {comment}
                 <div>
                     {commentsDisplay}
                 </div>
