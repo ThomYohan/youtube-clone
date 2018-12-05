@@ -12,14 +12,23 @@ class Upload extends Component {
     this.state = {
       isUploading: false,
       url: '',
-      user_id: 1,
+      user_id: 0,
       category: '',
       title: "",
       video_desc: "",
-      thumbnail: 'thumbnails.jpg'
+      thumbnail: 'thumbnails.jpg',
+      userInfo: {}
     };
     this.submitVideo = this.submitVideo.bind(this)
     this.handleInput = this.handleInput.bind(this)
+  }
+
+  componentDidMount() {
+    axios.get('/api/userinfo')
+        .then( (res) => {
+          this.setState({userInfo: res.data, user_id: res.data.user_id})
+          console.log(this.state.userInfo)
+        })
   }
 
   getSignedRequest = ([file]) => {
