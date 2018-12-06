@@ -1,0 +1,30 @@
+.Search {
+    width: 100%;
+    height: 100vh;
+    padding: 24px;
+}
+.search-list {
+    display: flex;
+    margin-bottom: 15px;
+}
+.title-descrip {
+    margin-left: 15px;
+}
+.title-descrip>h3 {
+    font-size: 19px ;
+    font-weight: 600;
+    margin-top: 3px;
+}
+#search-views {
+    font-weight: 300;
+    line-height: 1.7rem;
+    text-transform: none;
+    color: grey;
+}
+#search-descrip {
+    font-size: .9rem;
+    font-weight: 600;
+    line-height: 1.4rem;
+    text-transform: none;
+    color: grey;
+}

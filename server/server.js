@@ -116,7 +116,7 @@ app.get('/api/get-dislikes/:id', controller.getDislikes)
 app.post('/api/like-dislike', controller.like_dislike)
 app.post('/api/createcomment', controller.createComment)
 
-app.get('/api/search', controller.searchVideos)
+app.post('/api/search', controller.searchVideos)
 app.get('/api/userinfo', controller.getUser)
 app.post('/api/auth/signout', controller.signout)
 
