@@ -18,8 +18,9 @@ class Home extends Component {
             })
         })
     }
-
+    
     render(){
+        
         let videosDisplay = this.state.videos.map((video, i) => {
             return (
                 <div className="videoz" key={i}>
