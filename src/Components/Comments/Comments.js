@@ -11,6 +11,7 @@ class Comments extends Component {
             comments: [],
             commentInput: ''
         }
+        this.createComment = this.createComment.bind(this)
     }
     componentDidMount() {
         this.getComments()
@@ -33,16 +34,20 @@ class Comments extends Component {
             })
         })
     }
-    handleCommentInput(e) {
-            this.setState({
-                commentInput: e.target.value
-            })
+    handleCommentInput(e){
+        this.setState({
+            commentInput: e.target.value
+        })
     }
-    postComment(){
-        
+    createComment() {
+        axios.post('/api/createcomment', { video_id: this.props.video_id, comment: this.state.commentInput, user_id: this.state.userInfo.user_id })
+        .then(axios.get(`/api/comments/${this.props.video_id}`).then(res => {
+            this.setState({
+                comments: res.data
+            })
+        }))
     }
     render() {
-        console.log(11, this.props)
         let commentsDisplay = this.state.comments.map((comment, i) => {
             return (<div key={i}>
                 <div>
@@ -54,14 +59,14 @@ class Comments extends Component {
                 </div>
             </div>)
         })
-        let comment = <div/>
-         if (Object.keys(this.state.userInfo).length !== 0) {
+        let comment = <div />
+        if (Object.keys(this.state.userInfo).length !== 0) {
             comment = <div>
-                <img src={this.state.userInfo.picture}></img>
-                <input placeholder='Add a public comment...'></input>
-                <button onClick={(e) => this.handleCommentInput(e)}>Add Comment</button>
+                <img src={this.state.userInfo.user_img}></img>
+                <input onChange={e=>this.handleCommentInput(e)} placeholder='Add a public comment...'></input>
+                <button onClick={this.createComment}>Add Comment</button>
             </div>
-        } 
+        }
         else {
             comment = <div>
                 <p>Please Login to post a comment.</p>

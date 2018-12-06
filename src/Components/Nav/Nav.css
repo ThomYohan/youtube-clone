@@ -92,22 +92,24 @@ img {
     position: absolute;
     margin-top: 9px;
     width: 300px;
-    height: 200px;
-    background: gray;
+    height: 170px;
+    background: white;
+    z-index: 100;
+    box-shadow: 2px 2px 5px rgb(203, 203, 203);
 }
 
 .user-account{
     display: flex;
     width: 100%;
     height: 72px;
-    border: 1px solid red;
+    background: rgb(238, 238, 238)
 }
 .user-image-container{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
     width: 100px;
-    border: 1px solid black;
 }
 
 .menu-image {
@@ -118,27 +120,57 @@ img {
 
 .user-account-text {
     width: 100%;
-    border: 1px solid blue;
 }
 
 .user-name {
-    width: 100%;
-    height: 50%;
-    border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: 5px;
+    width: 99%;
+    height: 40%;
 }
 
 .user-email {
-    width: 100%;
-    height: 50%;
-    border: 1px solid blue;
+    padding-top: 2px;
+    width: 99%;
+    height: 40%;
 }
 
 .menu-channel {
-    width: 100px;
-    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    width: 100%;
+    height: 40px;
 }
 .menu-sign-out {
-    width: 100px;
-    height: 60px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+}
 
+.menu-channel:hover {
+    cursor: pointer;
+    background: rgb(238, 238, 238)
+}
+
+.menu-sign-out:hover {
+    cursor: pointer;
+    background: rgb(238, 238, 238)
+}
+
+.menu-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 40px;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 25px;
+}
+
+.menu-icon:hover {
+    cursor: pointer;
 }
