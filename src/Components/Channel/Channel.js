@@ -9,9 +9,12 @@ class Channel extends Component {
 
         this.state = {
             userInfo: {},
-            user_id: 0,
-            videos: []
+            videos: [],
+            channelName: 'Add a Channel Name',
+            videosLoading: true
         }
+        this.updateChannel = this.updateChannel.bind(this)
+        this.handleInput = this.handleInput.bind(this)
     }
 
     componentDidMount(){
@@ -21,27 +24,61 @@ class Channel extends Component {
     getUser = () => {
         axios.get('/api/userinfo')
         .then( (res) => {
-            console.log(25, res)
-          this.setState({userInfo: res.data, user_id: res.data.user_id})
+            if(res.data.channel_name){
+                this.setState({userInfo: res.data, channelName: res.data.channel_name})
+            } else {
+                this.setState({userInfo: res.data})
+            }
           this.getVideos()
         })
     }
 
     getVideos = () => {
-        let {user_id} = this.state
+        let {user_id} = this.state.userInfo
+        let {videosLoading} = this.state
         axios.get(`/api/by-user/${user_id}`)
             .then( (res) => {
-                console.log(33, res)
-                this.setState({videos: res.data})
+                this.setState({videos: res.data, videosLoading: !videosLoading})
             })
     }
 
+    handleInput(event){
+        console.log(event.target.value)
+        this.setState({[event.target.name]: event.target.value})
+    }
+    
+    updateChannel(){
+        let {channelName} = this.state
+        let {user_id} = this.state.userInfo
+        axios.put('/api/channel-name', {user_id, channelName})
+            .then( () => {
+                // this.setState({channelName: channel_name_input})
+                console.log(channelName)
+            })
+            .catch( err => console.log(err))
+    }
+
     render(){
-        let {first_name, last_name, channel_name, user_img} = this.state.userInfo
-        let {videos} = this.state
-        if(!channel_name){
-            channel_name = 'Add a Channel Name'
-        };
+        let {videos, videosLoading, userInfo, channelName} = this.state
+        let {first_name, last_name, channel_name, user_img} = userInfo
+        // let channel_name_field = <div></div>
+        if(!userInfo){
+            return (
+                <div className="channel">
+                    <div className="channel-banner-wrapper">
+                        <div className="channel-banner">
+                        Please sign in.
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
+        // if(!channel_name){
+        //     channel_name_field = <input type="text" placeholder='Add a Channel Name' name="channel_name_input" onChange={this.handleInput} />
+        // } else {
+        //     channel_name_field = <h1 className="channel-name">{channel_name}</h1>
+        // }
         let videosDisplay = videos.map( (video, i) => {
             return (
                 <div className="videoz" key={i}>
@@ -52,7 +89,7 @@ class Channel extends Component {
                 </div>
             )
         })
-        if(!videos[0]){
+        if(!videos[0] && !videosLoading){
             videosDisplay = "This channel doesn't have any content"
         } 
 
@@ -64,10 +101,11 @@ class Channel extends Component {
                             <img src={user_img} alt="profile-pic" className="profile-image"/>
                             <div className="name-wrapper">
                                 <h3 className="user-name">{first_name} {last_name}</h3>
-                                <h1 className="channel-name">{channel_name}</h1>
+                                {/* {channel_name_field} */}
+                                <input className="channel-name" name="channelName" placeholder={channelName} onChange={this.handleInput} />
                             </div>
                         </div>
-                        <div className="add-channel-name"><span>+ CHANNEL NAME</span></div>
+                        <div onClick={this.updateChannel} className="add-channel-name"><span>SAVE CHANNEL NAME</span></div>
                     </div>
                 </div>
                 <div className="Home">

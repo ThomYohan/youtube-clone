@@ -173,6 +173,17 @@ module.exports = {
                 res.status(500).send({ errorMessage: "Something went wrong"})
             })
     },
+    updateChannel: (req, res, next) => {
+        const db = req.app.get('db')
+        let {user_id, channel_name_input} = req.body
+        console.log(user_id, channel_name_input)
+
+        db.update_channel([user_id, channel_name_input])
+            .then( () => res.sendStatus(200))
+            .catch( (err) => {
+                res.status(500).send({ errorMessage: "Something went wrong"})
+            })
+    },
     signout: (req, res) => {
         req.session.destroy();
         res.sendStatus(200);
