@@ -18,8 +18,9 @@ class Home extends Component {
             })
         })
     }
-
+    
     render(){
+        
         let videosDisplay = this.state.videos.map((video, i) => {
             let user = ''
             if(video.channel_name){
