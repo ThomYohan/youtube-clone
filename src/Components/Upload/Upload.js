@@ -24,10 +24,10 @@ class Upload extends Component {
   }
 
   componentDidMount() {
+    
     axios.get('/api/userinfo')
         .then( (res) => {
           this.setState({userInfo: res.data, user_id: res.data.user_id})
-          console.log(this.state.userInfo)
         })
   }
 
@@ -142,7 +142,7 @@ class Upload extends Component {
             <option value="news">News</option>
             <option value="other">Other</option>          
           </select>
-          <input required type="text" placeholder="Title..." name="title" onChange={this.handleInput} className='title' />
+          <input required type="text" placeholder="Title... (Max 50)" name="title" onChange={this.handleInput} className='title' maxLength="50" />
           <textarea type="text" placeholder="Description..." name="video_desc" className='description' onChange={this.handleInput} />
           <input className='submit' type="submit" value="Submit" />
         </form>
