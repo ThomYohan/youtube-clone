@@ -36,12 +36,9 @@ class Nav extends Component {
         this.setState({
             searchField: e.target.value
         })
-        this.props.search(e.target.value)
+        
     }
 
-    // handleClick = () => {
-
-    // }
 
     componentDidMount() {
         this.getUser()
@@ -93,7 +90,7 @@ class Nav extends Component {
                         <input id="search-field" value={this.state.searchField}  onChange={this.handleSearch} type="text" placeholder="Search"/>
                     </div>
                     <div>
-                    <Link to='/search'><button className="search-button"><img src={pic} alt=""/></button></Link>
+                    <Link to={`/search/${this.state.searchField}`}><button className="search-button"><img src={pic} alt=""/></button></Link>
                     </div>
                 </div>
 

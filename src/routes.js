@@ -6,14 +6,14 @@ import Search from '../src/Components/Search/Search';
 import Video from '../src/Components/Video/Video';
 import Upload from './Components/Upload/Upload';
 
-export default function routes(searchInput){
-    return (
+export default (
+
     <Switch>
         <Route exact path='/' component={Home}/>
         <Route path='/channel' component={Channel}/>
-        <Route path='/search' render={()=> <Search searchInput={searchInput}/>}/>
+        <Route path='/search/:searchString' component={Search}/>
         <Route path='/video/:id' component={Video}/>
         <Route path='/upload' component={Upload}/>
     </Switch>
-    )
-}
+
+)
