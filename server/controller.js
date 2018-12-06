@@ -160,5 +160,17 @@ module.exports = {
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
             })
+    },
+    getVideosByUser: (req, res, next) => {
+        const db = req.app.get('db')
+        let { id } = req.params
+
+        db.get_videos_by_user([ id ])
+            .then( videos => {
+                res.status(200).send(videos)
+            })
+            .catch( err => {
+                res.status(500).send({ errorMessage: "Something went wrong"})
+            })
     }
 }

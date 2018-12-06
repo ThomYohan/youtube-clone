@@ -21,7 +21,6 @@ class Nav extends Component {
             image: '',
             showMenu: false
         }
-        this.handleInput = this.handleInput.bind(this)
     }
 
     signIn() {
