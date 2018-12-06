@@ -31,7 +31,13 @@ class Nav extends Component {
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
     }
 
-    
+    signOut = () => {
+        axios.post('/api/auth/signout').then(res => {
+            console.log('Sign Out Successful')
+            window.location.reload()
+        })
+    }
+
     handleSearch = (e) => {
         this.setState({
             searchField: e.target.value
@@ -43,7 +49,7 @@ class Nav extends Component {
 
     // }
 
-    componentDidMount() {
+    componentDidMount() { 
         this.getUser()
     }
 
@@ -90,10 +96,10 @@ class Nav extends Component {
 
                 <div id="search">
                     <div>
-                        <input id="search-field" value={this.state.searchField}  onChange={this.handleSearch} type="text" placeholder="Search"/>
+                        <input id="search-field" value={this.state.searchField} onChange={this.handleSearch} type="text" placeholder="Search" />
                     </div>
                     <div>
-                    <Link to='/search'><button className="search-button"><img src={pic} alt=""/></button></Link>
+                        <Link to='/search'><button className="search-button"><img src={pic} alt="" /></button></Link>
                     </div>
                 </div>
 
@@ -112,7 +118,10 @@ class Nav extends Component {
                                     <button className='user-btn'>
                                         <img onClick={() => this.toggleUserMenu()} className='user-image' src={this.state.image} alt="user" />
                                     </button>
-                                    <div className='user-menu'>
+                                    {
+                                        this.state.showMenu 
+                                        ?
+                                        <div className='user-menu'>
                                         <div className='user-account'>
                                             <div className='user-image-container'><img className='menu-image' src={this.state.image} alt="" /></div>
                                             <div className='user-account-text'>
@@ -120,9 +129,23 @@ class Nav extends Component {
                                                 <div className='user-email' >{this.state.email}</div>
                                             </div>
                                         </div>
-                                        <div className='menu-channel'>My Channel</div>
-                                        <div className='menu-sign-out'>SIGN OUT</div>
+                                        <Link to='/channel'><div className='menu-channel'>
+                                            <div className='menu-icon'>
+                                                <i className="fas fa-user"></i>
+                                            </div>
+                                            My Channel
+                                        </div>
+                                        </Link>
+                                        <div onClick={() => this.signOut()} className='menu-sign-out'>
+                                            <div className='menu-icon'>
+                                                <i className="fas fa-sign-out-alt"></i>
+                                            </div>
+                                            SIGN OUT
+                                        </div>
                                     </div>
+                                        :
+                                        null
+                                    }                      
                                 </div>
                                 :
                                 <button onClick={() => this.signIn()} className="sign-in">

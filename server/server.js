@@ -116,6 +116,7 @@ app.post('/api/like-dislike', controller.like_dislike)
 
 app.get('/api/search', controller.searchVideos)
 app.get('/api/userinfo', controller.getUser)
+app.post('/api/auth/signout', controller.signout)
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
