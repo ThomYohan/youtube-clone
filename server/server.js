@@ -117,6 +117,7 @@ app.post('/api/createcomment', controller.createComment)
 
 app.get('/api/search', controller.searchVideos)
 app.get('/api/userinfo', controller.getUser)
+app.post('/api/auth/signout', controller.signout)
 
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 

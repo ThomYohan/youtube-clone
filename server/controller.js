@@ -160,5 +160,9 @@ module.exports = {
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
             })
+    },
+    signout: (req, res) => {
+        req.session.destroy();
+        res.sendStatus(200);
     }
 }
