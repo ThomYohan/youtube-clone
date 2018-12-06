@@ -89,12 +89,18 @@ class Video extends Component {
     render() {
         console.log(this.props)
         let categoryList = this.state.videos.map((list, i) => {
+            let user = ''
+            if(list.channel_name){
+                user = list.channel_name
+            } else {
+                user = `${list.first_name} ${list.last_name}`
+            }
             return (
                 <div className='suggested-list' key={i}>
                     <Link to={`/video/${list.video_id}`}><video id="thumbnail" src={list.video_url}></video></Link>
                     <div className='category-desc'>
                         <h4>{list.title}</h4>
-                        <p>Author</p>
+                        <p>{user}</p>
                         <p>{list.view_count}</p>
                     </div>
                 </div>
