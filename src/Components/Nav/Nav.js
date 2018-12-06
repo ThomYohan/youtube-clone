@@ -129,7 +129,7 @@ class Nav extends Component {
                                                 <div className='user-email' >{this.state.email}</div>
                                             </div>
                                         </div>
-                                        <Link to='/channel'><div className='menu-channel'>
+                                        <Link onClick={() => this.toggleUserMenu()} to='/channel'><div className='menu-channel'>
                                             <div className='menu-icon'>
                                                 <i className="fas fa-user"></i>
                                             </div>
