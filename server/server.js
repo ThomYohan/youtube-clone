@@ -122,5 +122,6 @@ app.post('/api/auth/signout', controller.signout)
 
 app.put('/api/channel-name', controller.updateChannel)
 
+app.delete('/api/delete/:video_id', controller.deleteVideo)
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
