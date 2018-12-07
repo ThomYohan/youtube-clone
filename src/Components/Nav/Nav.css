@@ -3,8 +3,9 @@
     align-items: center;
     /* justify-content: space-between; */
     height: 56px;
-    border-bottom: 1px solid gray;
+    /* border-bottom: 1px solid gray; */
     padding: 0 16px;
+    background: rgb(255, 255, 255)
 }
 .hamburger{
     border: none;
