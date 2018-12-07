@@ -10,10 +10,11 @@ class Channel extends Component {
         this.state = {
             userInfo: {},
             videos: [],
-            channelName: 'Add a Channel Name',
-            videosLoading: true
+            channelName: '',
+            videosLoading: true,
+            showSave: false,
+            disable: true
         }
-        this.updateChannel = this.updateChannel.bind(this)
         this.handleInput = this.handleInput.bind(this)
     }
 
@@ -25,7 +26,10 @@ class Channel extends Component {
         axios.get('/api/userinfo')
         .then( (res) => {
             if(res.data.channel_name){
-                this.setState({userInfo: res.data, channelName: res.data.channel_name})
+                this.setState({
+                    userInfo: res.data,
+                    channelName: res.data.channel_name
+                })
             } else {
                 this.setState({userInfo: res.data})
             }
@@ -43,25 +47,41 @@ class Channel extends Component {
     }
 
     handleInput(event){
-        console.log(event.target.value)
         this.setState({[event.target.name]: event.target.value})
     }
+
+    handleEditClick = () => {
+        this.setState({
+            disable: !this.state.disable,
+            showSave: !this.state.showSave
+        })
+    }
     
-    updateChannel(){
-        let {channelName} = this.state
+    handleSaveClick = () => {
+
+        let {channelName} = this.state;
         let {user_id} = this.state.userInfo
-        axios.put('/api/channel-name', {user_id, channelName})
-            .then( () => {
-                // this.setState({channelName: channel_name_input})
-                console.log(channelName)
+        console.log(user_id, channelName)
+        axios.put('/api/channel-name', {user_id, channelName}).then(res => {
+            this.setState({
+                disable: !this.state.disable,
+                showSave: !this.state.showSave
             })
-            .catch( err => console.log(err))
+        });
+    }
+
+    deleteVideo( video ){
+        let {video_id} = video
+        axios.delete(`/api/delete/${video_id}`)
+            .then( () => {
+                this.getVideos()
+            })
     }
 
     render(){
-        let {videos, videosLoading, userInfo, channelName} = this.state
-        let {first_name, last_name, channel_name, user_img} = userInfo
-        // let channel_name_field = <div></div>
+        let {videos, videosLoading, userInfo} = this.state
+        let {first_name, last_name, user_img} = userInfo
+
         if(!userInfo){
             return (
                 <div className="channel">
@@ -74,18 +94,16 @@ class Channel extends Component {
             )
         }
 
-        // if(!channel_name){
-        //     channel_name_field = <input type="text" placeholder='Add a Channel Name' name="channel_name_input" onChange={this.handleInput} />
-        // } else {
-        //     channel_name_field = <h1 className="channel-name">{channel_name}</h1>
-        // }
         let videosDisplay = videos.map( (video, i) => {
             return (
                 <div className="videoz" key={i}>
                     <Link to={`/video/${video.video_id}`}><video id="thumbnail" src={video.video_url}></video></Link>
-                    <h4>{video.title}</h4>
-                    <p id="vid-author">Uploaded by You</p>
-                    <p id="view-count">{video.view_count} views</p>
+                        <h4>{video.title}</h4>
+                        <div className="upload-page-video-info">
+                            <p id="vid-author">Uploaded by You</p>
+                            <p id="view-count">{video.view_count} views</p>
+                        </div>
+                        <button className="delete-btn" onClick={ () => this.deleteVideo(video)} >Delete</button>
                 </div>
             )
         })
@@ -101,11 +119,13 @@ class Channel extends Component {
                             <img src={user_img} alt="profile-pic" className="profile-image"/>
                             <div className="name-wrapper">
                                 <h3 className="user-name">{first_name} {last_name}</h3>
-                                {/* {channel_name_field} */}
-                                <input className="channel-name" name="channelName" placeholder={channelName} onChange={this.handleInput} />
+                                <input className="channel-name" type="text" onChange={this.handleInput} value={this.state.channelName} name="channelName" disabled={this.state.disable}/>
                             </div>
                         </div>
-                        <div onClick={this.updateChannel} className="add-channel-name"><span>SAVE CHANNEL NAME</span></div>
+                        {this.state.showSave
+                        ? <div onClick={this.handleSaveClick} className="add-channel-name"><span>SAVE CHANNEL NAME</span></div>
+                        : <div onClick={this.handleEditClick} className="add-channel-name"><span>EDIT CHANNEL NAME</span></div>
+                        }
                     </div>
                 </div>
                 <div className="Home">
