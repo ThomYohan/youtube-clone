@@ -96,7 +96,7 @@ class Nav extends Component {
                         <input id="search-field" value={this.state.searchField} onChange={this.handleSearch} type="text" placeholder="Search" />
                     </div>
                     <div>
-                    <Link to={`/search/${this.state.searchField}`}><button className="search-button"><img src={pic} alt=""/></button></Link>
+                    <Link to={`/search/${this.state.searchField}`}><button type='submit'className="search-button"><img src={pic} alt=""/></button></Link>
                     </div>
                 </div>
 
