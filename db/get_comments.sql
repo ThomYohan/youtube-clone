@@ -1,6 +1,7 @@
 select
    u.first_name,
    u.last_name,
+   u.channel_name,
    u.user_img,
    c.comment_id,
    c.comment
