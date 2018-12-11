@@ -100,8 +100,8 @@ class Video extends Component {
                     <Link to={`/video/${list.video_id}`}><video id="thumbnail" src={list.video_url}></video></Link>
                     <div className='category-desc'>
                         <h4>{list.title}</h4>
-                        <p>{user}</p>
-                        <p>{list.view_count}</p>
+                        <p id="sug-auth">{user}</p>
+                        <p id="sug-v-count">{list.view_count} views</p>
                     </div>
                 </div>
             )
@@ -123,6 +123,19 @@ class Video extends Component {
                                 <button onClick={this.dislikeVideo} id="dislike-button"><img src={pic} alt="" /></button>
                                 <p>{this.state.dislikeCount}</p>
                             </div>
+                        </div>
+                    </div>
+                    <div className="author-n-descrip">
+                        <div>
+                            <div className="user-piccc">
+                                img
+                            </div>
+                            <div className="author-area">
+                                author
+                            </div>
+                        </div>
+                        <div className="vid-description">
+                            descrip3
                         </div>
                     </div>
                     <Comments video_id={this.props.match.params.id}/>
