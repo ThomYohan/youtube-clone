@@ -39,12 +39,19 @@
 }
 
 .name-wrapper > .user-name{
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     border: none;
 }
 
 .name-wrapper > .channel-name {
-    font-size: 2.3rem;
+    font-size: 1.9rem;
+}
+
+.name-wrapper > .channel-name:disabled {
+    background-color: rgb(212, 212, 212);
+    border: none;
+    color: rebeccapurple;
+    font-weight: 700;
 }
 
 .add-channel-name {
@@ -118,4 +125,18 @@ video {
 }
 #thumbnail {
     background: black;
+}
+
+.delete-btn {
+    float: right;
+    margin-right: 44px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 2px;
+    background-color: rebeccapurple;
+    color: whitesmoke;
+}
+
+.upload-page-video-info {
+    display: inline-block;
 }
