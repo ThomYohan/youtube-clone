@@ -179,3 +179,7 @@
 .menu-icon:hover {
     cursor: pointer;
 }
+
+.swal2-popup .swal2-styled.swal2-confirm {
+    background-color: rebeccapurple !important;
+}

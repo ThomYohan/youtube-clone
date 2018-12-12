@@ -5,6 +5,7 @@ import { v4 as randomString } from 'uuid';
 import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import uTubeUpload3 from '../../images/uTubeUpload3.png';
+import Swal from 'sweetalert2';
 
 class Upload extends Component {
   constructor() {
@@ -24,11 +25,24 @@ class Upload extends Component {
   }
 
   componentDidMount() {
-    
+    this.getUser()
+  }
+
+  getUser = () => {
     axios.get('/api/userinfo')
-        .then( (res) => {
-          this.setState({userInfo: res.data, user_id: res.data.user_id})
+    .then( (res) => {
+      this.setState({userInfo: res.data, user_id: res.data.user_id})
+      if(!this.state.user_id){
+        Swal ({
+          type: 'warning',
+          title: 'Oops...',
+          text: 'Sign in to access this feature',
+          onClose: () => {
+            this.props.history.push('/')
+          }
         })
+      }
+    })
   }
 
   getSignedRequest = ([file]) => {
@@ -99,53 +113,56 @@ class Upload extends Component {
   }
 
   render() {
-    const { url, isUploading } = this.state;
+    const { url, isUploading, user_id } = this.state;
+    
     return (
       <div className="upload-page">
-        <video src={url} alt="video_preview" controls/>
+        <div className="upload-section" >
+          <video src={url} alt="video_preview" controls/>
 
-        <div className="upload-area">
-          <Dropzone
-            onDropAccepted={this.getSignedRequest}
-            style={{
-              position: 'relative',
-              width: '40vw',
-              height: '30vh',
-              borderWidth: 3,
-              margin: 0,
-              borderColor: 'rgb(175, 175, 175)',
-              borderRadius: 15,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: '1.75rem',
-            }}
-            accept="video/*"
-            multiple={false}
-            >
-            {isUploading ? <GridLoader /> : 
-              <div className='upload-box'>
-                <img id='upload-icon' src={uTubeUpload3} alt='u tube upload' />
-                <p>Select file to upload</p>
-              </div>}
-          </Dropzone>
+          <div className="upload-area">
+            <Dropzone
+              onDropAccepted={this.getSignedRequest}
+              style={{
+                position: 'relative',
+                width: '40vw',
+                height: '30vh',
+                borderWidth: 3,
+                margin: 0,
+                borderColor: 'rgb(175, 175, 175)',
+                borderRadius: 15,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '1.75rem',
+              }}
+              accept="video/*"
+              multiple={false}
+              >
+              {isUploading ? <GridLoader /> : 
+                <div className='upload-box'>
+                  <img id='upload-icon-btn' src={uTubeUpload3} alt='u tube upload' />
+                  <p>Select file to upload</p>
+                </div>}
+            </Dropzone>
+          </div>
+
+          <form className='upload-form' onSubmit={this.submitVideo}>
+            <select required name="category" className='category' onChange={this.handleInput}>
+              <option value="" disabled selected>Select a category</option>
+              <option value="music">Music</option>
+              <option value="sports">Sports</option>
+              <option value="gaming">Gaming</option>
+              <option value="movies">Movies</option>
+              <option value="tv-shows">TV Shows</option>
+              <option value="news">News</option>
+              <option value="other">Other</option>          
+            </select>
+            <input required type="text" placeholder="Title... (Max 80)" name="title" onChange={this.handleInput} className='title' maxLength="80" />
+            <textarea type="text" placeholder="Description..." name="video_desc" className='description' onChange={this.handleInput} />
+            <input className='submit' type="submit" value="Submit" />
+          </form>
         </div>
-
-        <form className='upload-form' onSubmit={this.submitVideo}>
-          <select required name="category" className='category' onChange={this.handleInput}>
-            <option value="" disabled selected>Select a category</option>
-            <option value="music">Music</option>
-            <option value="sports">Sports</option>
-            <option value="gaming">Gaming</option>
-            <option value="movies">Movies</option>
-            <option value="tv-shows">TV Shows</option>
-            <option value="news">News</option>
-            <option value="other">Other</option>          
-          </select>
-          <input required type="text" placeholder="Title... (Max 80)" name="title" onChange={this.handleInput} className='title' maxLength="80" />
-          <textarea type="text" placeholder="Description..." name="video_desc" className='description' onChange={this.handleInput} />
-          <input className='submit' type="submit" value="Submit" />
-        </form>
       </div>
     );
   }

@@ -1,19 +1,27 @@
 .upload-page {
+    height: 94%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.upload-section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     font-family: 'Roboto', sans-serif;
     background-color: rgb(212, 212, 212);
-    width: 45vw;
-    margin-top: 20px;
-    margin-left: 25%;
+    width: 45%;
+    /* margin-top: 20px;
+    margin-left: 25%; */
     border-radius: 1%;
     border-style: solid;
 }
 
-.upload-page > video {
+.upload-section > video {
     border: 1px solid rgb(175, 175, 175);
-    margin: 20px 0px;
+    margin: 30px 0px;
     background-color: whitesmoke;
 }
 
@@ -35,8 +43,8 @@
     cursor: pointer;
 }
 
-.upload-box > img {
-    height: 133px;
+.upload-box > #upload-icon-btn {
+    height: 130px;
     width: 160px;
     margin-bottom: 15px;
 }
@@ -56,6 +64,7 @@
     justify-content: space-around;
     align-items: center;
     height: 300px;
+    margin-bottom: 15px;
 }
 
 .upload-form > select, input, textarea {
@@ -75,5 +84,21 @@
 .upload-form > .submit {
     width: 90%;
     box-shadow: 7px 5px 15px 5px rgba(175, 175, 175, 1);
+    background-color: rebeccapurple;
+    color: whitesmoke;
+    font-size: 16px;
+    height: 37px;
+    width: 193px;
+    border: none;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-form > .submit:hover{
+    transition: 0.5;
+    background-color: rgb(110, 66, 155);
+    cursor: pointer;
 }
 
