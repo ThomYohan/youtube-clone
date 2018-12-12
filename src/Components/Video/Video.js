@@ -12,6 +12,9 @@ class Video extends Component {
         this.state = {
             videos: [],
             showVid: {},
+            author: '',
+            img: '',
+            description: '',
             likeCount: 0,
             dislikeCount: 0
         }
@@ -34,8 +37,12 @@ class Video extends Component {
 
     getVideo = () => {
         axios.get(`/api/video/${this.props.match.params.id}`).then(res => {
+            console.log(6666, res.data)
             this.setState({
-                showVid: res.data[0]
+                showVid: res.data[0],
+                author: res.data[0].channel_name,
+                img: res.data[0].user_img,
+                description: res.data[0].video_desc
             })
             let category = res.data[0].category
             axios.get(`/api/video-categories/${category}/${this.props.match.params.id}`).then(res => {
@@ -113,7 +120,7 @@ class Video extends Component {
                     <video className="vid" controls src={this.state.showVid.video_url}></video>
                     <h4 id="titulo">{this.state.showVid.title}</h4>
                     <div className="views-n-likes">
-                        <span><p>{this.state.showVid.view_count} views</p></span>
+                        <span><p id="xxxx">{this.state.showVid.view_count} views</p></span>
                         <div className="likes">
                             <div className="likebox">
                                 <button onClick={this.likeVideo} id="like-button"><img src={pic2} alt="" /></button>
@@ -125,19 +132,22 @@ class Video extends Component {
                             </div>
                         </div>
                     </div>
+                    <div id="line-thing"></div>
                     <div className="author-n-descrip">
-                        <div>
+                        <div className="upperTier">
                             <div className="user-piccc">
-                                img
+                                <img id="com-pic" src={this.state.img} alt=""/>
                             </div>
                             <div className="author-area">
-                                author
+                                <h3 id="author-text">{this.state.author}</h3>
                             </div>
                         </div>
                         <div className="vid-description">
-                            descrip3
+                            {this.state.description}
                         </div>
                     </div>
+                    <br/>
+                    <div id="line-thing"></div>
                     <Comments video_id={this.props.match.params.id}/>
                 </div>
                 <div className='category-list'>

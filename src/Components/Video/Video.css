@@ -7,6 +7,10 @@
     width: 763px;
     height: 428px;
 }
+#xxxx {
+    font-weight: 300;
+    line-height: 1.7rem;
+}
 .player{
     margin-left: 24px;
     padding: 24px 0 0 24px;
@@ -26,6 +30,8 @@
 }
 .likes {
     display: flex;
+    position: absolute;
+    right: 500px;
 }
 .likebox {
     display: flex;
@@ -36,6 +42,7 @@
     display: flex;
     align-items: center;
     color: grey;
+    margin-left: 10px;
     
 }
 #like-button{
@@ -89,4 +96,21 @@
     text-transform: none;
     color: grey;
     font-size: .9rem;
+}
+.upperTier {
+    display: flex;
+}
+.author-area {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+#line-thing {
+    border-bottom: 1px solid rgb(206, 206, 206);
+    margin: 15px 0;
+}
+.vid-description {
+    margin-left: 65px;
+}
+#author-text {
+    font-weight: bold;
 }
