@@ -113,7 +113,7 @@ class Upload extends Component {
   }
 
   render() {
-    const { url, isUploading, user_id } = this.state;
+    const { url, isUploading } = this.state;
     
     return (
       <div className="upload-page">
