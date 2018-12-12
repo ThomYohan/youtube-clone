@@ -6,6 +6,7 @@ import pic2 from './icons8-facebook-like-24.png';
 import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
 
+
 class Video extends Component {
     constructor() {
         super()
@@ -27,6 +28,7 @@ class Video extends Component {
         
     }
 
+    
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
             this.getVideo()
@@ -90,8 +92,6 @@ class Video extends Component {
             this.getDislikes()
         })
     }
-
-
 
     render() {
         console.log(this.props)
