@@ -4,6 +4,7 @@ import './Nav.css'
 import pic from './icons8-search-24.png'
 import pic2 from './add video.svg'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 class Nav extends Component {
@@ -21,6 +22,7 @@ class Nav extends Component {
             image: '',
             showMenu: false
         }
+        this.checkSignedIn = this.checkSignedIn.bind(this)
     }
 
     signIn() {
@@ -75,6 +77,19 @@ class Nav extends Component {
         })
     }
 
+    checkSignedIn(e){
+        let {signedIn} = this.state;
+        if(!signedIn){
+            e.preventDefault();
+            Swal({
+            type: 'warning',
+            title: 'Oops...',
+            text: 'Sign in to access this feature'
+            // footer: '<a href>Why do I have this issue?</a>'
+          })
+        }
+    }
+
     render() {
         return (
             <div className='nav'>
@@ -102,7 +117,7 @@ class Nav extends Component {
 
                 <div id="buttons">
                     <div>
-                        <Link to='/upload'>
+                        <Link onClick={this.checkSignedIn} to='/upload'>
                             <button className="add-video">
                                 <img id="upload-icon" src={pic2} alt="" /></button>
                         </Link>
