@@ -49,21 +49,25 @@ class Comments extends Component {
     }
     render() {
         let commentsDisplay = this.state.comments.map((comment, i) => {
-            return (<div key={i}>
-                <div>
-                    <div><img src={comment.user_img } alt="user"></img></div>
+            return (
+                <div className="comments-main" key={i}>
+                    <div>
+                        <div><img id="com-pic"src={comment.user_img } alt="user"></img></div>
+                    </div>
+                    <div className="author-n-com">
+                        <h3 id="com-author">{comment.first_name} {comment.last_name}</h3>
+                        <div>{comment.comment}</div>
+                    </div>
                 </div>
-                <div>
-                    <div>{comment.first_name} {comment.last_name}</div>
-                    <div>{comment.comment}</div>
-                </div>
-            </div>)
+            )
         })
         let comment = <div />
         if (Object.keys(this.state.userInfo).length !== 0) {
-            comment = <div>
-                <img src={this.state.userInfo.user_img}></img>
-                <input onChange={e=>this.handleCommentInput(e)} placeholder='Add a public comment...'></input>
+            comment = <div className="add-comment">
+                <div>
+                    <img id="com-pic" src={this.state.userInfo.user_img}></img>
+                </div>
+                <input id="comment-field" onChange={e=>this.handleCommentInput(e)} placeholder='Add a public comment...'></input>
                 <button onClick={this.createComment}>Add Comment</button>
             </div>
         }
@@ -78,8 +82,8 @@ class Comments extends Component {
                     <h1>Comments: {this.state.comments.length}</h1>
                 </div>
                 <div>
-                    <img src={this.state.userInfo.picture} alt='user'></img>
-                    <input placeholder='Add a public comment...'></input>
+                    {/* <img src={this.state.userInfo.picture} alt='user'></img>
+                    <input placeholder='Add a public comment...'></input> */}
                 </div>
                     {comment}
                 <div>
