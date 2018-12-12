@@ -7,6 +7,7 @@ import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+
 class Video extends Component {
     constructor() {
         super()
@@ -30,6 +31,7 @@ class Video extends Component {
         this.getUser()
     }
 
+    
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
             this.getVideo()
@@ -122,8 +124,6 @@ class Video extends Component {
             })
         }
     }
-
-
 
     render() {
         console.log(this.props)
