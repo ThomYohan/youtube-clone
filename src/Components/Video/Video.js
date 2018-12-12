@@ -5,6 +5,7 @@ import pic from './icons8-facebook-dislike-24.svg';
 import pic2 from './icons8-facebook-like-24.png';
 import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 class Video extends Component {
@@ -17,7 +18,9 @@ class Video extends Component {
             img: '',
             description: '',
             likeCount: 0,
-            dislikeCount: 0
+            dislikeCount: 0,
+            signedIn: false,
+            userInfo: {}
         }
     }
 
@@ -25,7 +28,7 @@ class Video extends Component {
         this.getVideo()
         this.getLikes()
         this.getDislikes()
-        
+        this.getUser()
     }
 
     
@@ -35,6 +38,18 @@ class Video extends Component {
             this.getLikes()
             this.getDislikes()
         }
+    }
+
+    getUser = () => {
+        axios.get('/api/userinfo').then(res => {
+            console.log("hello", res.data)
+            if (res.data.user_id) {
+                this.setState({
+                    signedIn: true,
+                    userInfo: res.data
+                })
+            }
+        })
     }
 
     getVideo = () => {
@@ -76,21 +91,38 @@ class Video extends Component {
     likeVideo = () => {
         let video_id = this.props.match.params.id
         let likeDislike = true
-        console.log(video_id)
-        axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
-            this.getLikes()
-            this.getDislikes()
-
-        })
+        let {signedIn} = this.state
+        if(!signedIn){
+            Swal ({
+                type: 'warning',
+                title: 'Oops',
+                text: 'Sign in to access this feature'
+            })
+        } else {
+            axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                this.getLikes()
+                this.getDislikes()
+    
+            })
+        }
     }
 
     dislikeVideo = () => {
         let video_id = this.props.match.params.id
         let likeDislike = false
-        axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
-            this.getLikes()
-            this.getDislikes()
-        })
+        let {signedIn} = this.state
+        if(!signedIn){
+            Swal ({
+                type: 'warning',
+                title: 'Oops',
+                text: 'Sign in to access this feature'
+            })
+        } else {
+            axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                this.getLikes()
+                this.getDislikes()
+            })
+        }
     }
 
     render() {
