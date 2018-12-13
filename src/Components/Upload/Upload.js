@@ -18,7 +18,8 @@ class Upload extends Component {
       title: "",
       video_desc: "",
       thumbnail: 'thumbnails.jpg',
-      userInfo: {}
+      userInfo: {},
+      vidDuration: ''
     };
     this.submitVideo = this.submitVideo.bind(this)
     this.handleInput = this.handleInput.bind(this)
@@ -60,7 +61,6 @@ class Upload extends Component {
         },
       })
       .then(response => {
-        console.log(file)
         const { signedRequest, url } = response.data;
         this.uploadFile(file, signedRequest, url);
       })
@@ -82,7 +82,6 @@ class Upload extends Component {
         console.log(response)
         this.setState({ isUploading: false, url });
         console.log(url)
-
       })
       .catch(err => {
         this.setState({
@@ -105,8 +104,17 @@ class Upload extends Component {
   }
 
   submitVideo(event){
+    let vid = document.getElementById('uploaded-video-thumbnail')
+    console.log(vid.duration)
+    let {duration} = vid
+    let minutes = Math.floor((duration)/60)
+    let second = Math.floor((duration) % 60)
+    let seconds = ('0' + second).slice(-2)
+    let strDuration = `${minutes}:${seconds}`
+    console.log(strDuration)
+    // this.setState({vidDuration: strDuration})
     let {url, user_id, category, title, video_desc, thumbnail} = this.state
-    axios.post('/api/upload', {url, user_id, category, title, video_desc, thumbnail})
+    axios.post('/api/upload', {url, user_id, category, title, video_desc, thumbnail, strDuration})
         .then( () => console.log('successfully saved video info to db'))
         .catch( err => console.log(err))
     event.preventDefault();
@@ -118,7 +126,7 @@ class Upload extends Component {
     return (
       <div className="upload-page">
         <div className="upload-section" >
-          <video src={url} alt="video_preview" controls/>
+          <video id="uploaded-video-thumbnail" src={url} alt="video_preview" controls/>
 
           <div className="upload-area">
             <Dropzone
@@ -160,6 +168,7 @@ class Upload extends Component {
             </select>
             <input required type="text" placeholder="Title... (Max 80)" name="title" onChange={this.handleInput} className='title' maxLength="80" />
             <textarea type="text" placeholder="Description..." name="video_desc" className='description' onChange={this.handleInput} />
+            <p>{}</p>
             <input className='submit' type="submit" value="Submit" />
           </form>
         </div>

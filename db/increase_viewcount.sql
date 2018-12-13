@@ -1,3 +1,4 @@
 UPDATE video
-SET view_count = $2
-WHERE video_id = $1;
+SET view_count = view_count + 1
+WHERE video_id = $1
+RETURNING view_count;
