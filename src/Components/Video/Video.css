@@ -2,6 +2,7 @@
     display: flex;
     background: rgb(250,250,250);
     min-height: 100vh;
+    margin-top: 56px;
 }
 .vid{
     width: 763px;
@@ -15,7 +16,7 @@
     margin-left: 24px;
     padding: 24px 0 0 24px;
     width: 770px;
-    height: 100vh;
+    min-height: 100vh;
 }
 #titulo {
     font-size: 20px;
@@ -24,14 +25,15 @@
 }
 .views-n-likes {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     /* border: 1px solid green; */
 }
 .likes {
     display: flex;
-    position: absolute;
-    right: 500px;
+    /* position: absolute;
+    right: 500px; */
 }
 .likebox {
     display: flex;
