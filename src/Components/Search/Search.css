@@ -1,6 +1,6 @@
 .Search {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 24px;
     margin-top: 56px;
 }
@@ -10,6 +10,7 @@
 }
 .title-descrip {
     margin-left: 15px;
+    width: 50%;
 }
 .title-descrip>h3 {
     font-size: 19px ;
@@ -23,9 +24,25 @@
     color: grey;
 }
 #search-descrip {
+    
     font-size: .9rem;
     font-weight: 600;
     line-height: 1.4rem;
     text-transform: none;
     color: grey;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#vids-dur {
+    padding: 1px 0 1px 3px;
+    border-radius: 2px;
+    font-weight: bold;
+    color: white;
+    width: 35px;
+    background: grey;
+    opacity: .8;
+    position: relative;
+    top: 23px;
+    right: 55px;
 }

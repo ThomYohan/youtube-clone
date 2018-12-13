@@ -116,3 +116,15 @@
 #author-text {
     font-weight: bold;
 }
+#vids-duration {
+    padding: 1px 0 1px 3px;
+    border-radius: 2px;
+    font-weight: bold;
+    color: white;
+    width: 35px;
+    background: grey;
+    opacity: .8;
+    position: relative;
+    top: 33px;
+    right: 48px;
+}

@@ -156,8 +156,8 @@ class Video extends Component {
                     <div className='category-desc'>
                         <h4>{list.title}</h4>
                         <p id="sug-auth">{user}</p>
-                        <p>{list.duration}</p>
                         <p id="sug-v-count">{list.view_count} views</p>
+                        <p id="vids-duration">{list.duration}</p>
                     </div>
                 </div>
             )
