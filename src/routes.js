@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from '../src/Components/Home/Home';
 import Channel from '../src/Components/Channel/Channel';
 import Search from '../src/Components/Search/Search';
@@ -13,7 +13,15 @@ export default (
         <Route path='/channel' component={Channel}/>
         <Route path='/search/:searchString' component={Search}/>
         <Route path='/video/:id' component={Video}/>
-        <Route path='/upload' component={Upload}/>
+        <Route path='/upload' component={Upload}/>        
+        <Route path='/redirect' render={(props)=>{
+            let url = document.cookie.match(/(?<=redirecturl=).+?$/)[0]
+            if(url === 'undefined'){
+                console.log('if statement')
+                url = '/'
+            }
+            return <Redirect to={url} />
+            }}/>
     </Switch>
 
 )

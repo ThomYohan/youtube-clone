@@ -36,7 +36,7 @@ app.use(session({
 }))
 
 app.get('/auth/callback', async (req, res) => {
-
+    
     let payload = {
         client_id: REACT_APP_CLIENT_ID,
         client_secret: CLIENT_SECRET,
@@ -67,7 +67,7 @@ app.get('/auth/callback', async (req, res) => {
         let createdCust = await db.create_user([firstName, lastName, sub, picture, email])
         req.session.user = createdCust[0]
     }
-    res.redirect('/#/')
+    res.redirect(`/#/redirect`)
 });
 
 app.get('/api/signs3', (req, res) => {
@@ -116,6 +116,8 @@ app.get('/api/userinfo', controller.getUser)
 
 app.post('/api/search', controller.searchVideos)
 app.post('/api/createcomment', controller.createComment)
+app.get('/api/search', controller.searchVideos)
+app.get('/api/userinfo', controller.getUser)
 app.post('/api/like-dislike', controller.like_dislike)
 app.post('/api/upload', controller.upload)
 app.post('/api/auth/signout', controller.signout)
