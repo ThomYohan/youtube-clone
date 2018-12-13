@@ -4,6 +4,7 @@ import './Nav.css'
 import pic from './icons8-search-24.png'
 import pic2 from './add video.svg'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 class Nav extends Component {
@@ -21,6 +22,7 @@ class Nav extends Component {
             image: '',
             showMenu: false
         }
+        this.checkSignedIn = this.checkSignedIn.bind(this)
     }
 
     signIn() {
@@ -30,19 +32,22 @@ class Nav extends Component {
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
     }
 
-    
+    signOut = () => {
+        axios.post('/api/auth/signout').then(res => {
+            console.log('Sign Out Successful')
+            window.location.reload()
+        })
+    }
+
     handleSearch = (e) => {
         this.setState({
             searchField: e.target.value
         })
-        this.props.search(e.target.value)
+        
     }
 
-    // handleClick = () => {
 
-    // }
-
-    componentDidMount() {
+    componentDidMount() { 
         this.getUser()
     }
 
@@ -70,6 +75,19 @@ class Nav extends Component {
         })
     }
 
+    checkSignedIn(e){
+        let {signedIn} = this.state;
+        if(!signedIn){
+            e.preventDefault();
+            Swal({
+            type: 'warning',
+            title: 'Oops...',
+            text: 'Sign in to access this feature'
+            // footer: '<a href>Why do I have this issue?</a>'
+          })
+        }
+    }
+
     render() {
         console.log(window.location.href)
         return (
@@ -89,18 +107,18 @@ class Nav extends Component {
 
                 <div id="search">
                     <div>
-                        <input id="search-field" value={this.state.searchField}  onChange={this.handleSearch} type="text" placeholder="Search"/>
+                        <input id="search-field" value={this.state.searchField} onChange={this.handleSearch} type="text" placeholder="Search" />
                     </div>
                     <div>
-                    <Link to='/search'><button className="search-button"><img src={pic} alt=""/></button></Link>
+                    <Link to={`/search/${this.state.searchField}`}><button className="search-button"><img id="mag-glass" src={pic} alt=""/></button></Link>
                     </div>
                 </div>
 
                 <div id="buttons">
                     <div>
-                        <Link to='/upload'>
+                        <Link onClick={this.checkSignedIn} to='/upload'>
                             <button className="add-video">
-                                <img src={pic2} alt="" /></button>
+                                <img id="upload-icon" src={pic2} alt="" /></button>
                         </Link>
                     </div>
                     <div>
@@ -111,7 +129,10 @@ class Nav extends Component {
                                     <button className='user-btn'>
                                         <img onClick={() => this.toggleUserMenu()} className='user-image' src={this.state.image} alt="user" />
                                     </button>
-                                    <div className='user-menu'>
+                                    {
+                                        this.state.showMenu 
+                                        ?
+                                        <div className='user-menu'>
                                         <div className='user-account'>
                                             <div className='user-image-container'><img className='menu-image' src={this.state.image} alt="" /></div>
                                             <div className='user-account-text'>
@@ -119,9 +140,23 @@ class Nav extends Component {
                                                 <div className='user-email' >{this.state.email}</div>
                                             </div>
                                         </div>
-                                        <div className='menu-channel'>My Channel</div>
-                                        <div className='menu-sign-out'>SIGN OUT</div>
+                                        <Link onClick={() => this.toggleUserMenu()} to='/channel'><div className='menu-channel'>
+                                            <div className='menu-icon'>
+                                                <i className="fas fa-user"></i>
+                                            </div>
+                                            My Channel
+                                        </div>
+                                        </Link>
+                                        <div onClick={() => this.signOut()} className='menu-sign-out'>
+                                            <div className='menu-icon'>
+                                                <i className="fas fa-sign-out-alt"></i>
+                                            </div>
+                                            SIGN OUT
+                                        </div>
                                     </div>
+                                        :
+                                        null
+                                    }                      
                                 </div>
                                 :
                                 <button onClick={() => this.signIn()} className="sign-in">

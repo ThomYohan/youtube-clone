@@ -1,0 +1,32 @@
+.comments {
+    background: rgb(250,250,250);
+}
+.comments-main {
+    display: flex;
+    margin-top: 10px;
+}
+#com-pic {
+    width: 50px;
+    height: 50px;
+}
+.author-n-com {
+    margin-left: 10px;
+}
+#com-author {
+    font-weight: bold;
+    line-height: 1.7rem;
+}
+#comment-field {
+    width: 90%;
+    height: 25px;
+    border: none;
+    font-size: 14px;
+    border-bottom: 1px solid rgb(206, 206, 206);
+    margin-left: 10px;
+    background: rgb(250,250,250);
+}
+.add-comment {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
