@@ -121,6 +121,7 @@ app.post('/api/upload', controller.upload)
 app.post('/api/auth/signout', controller.signout)
 
 app.put('/api/channel-name', controller.updateChannel)
+app.put('/api/view-count', controller.viewCount)
 
 app.delete('/api/delete/:video_id', controller.deleteVideo)
 
