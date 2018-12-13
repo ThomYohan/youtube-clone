@@ -79,13 +79,14 @@ class Comments extends Component {
         return (
             <div className='comments'>
                 <div>
-                    <h1>Comments: {this.state.comments.length}</h1>
+                    <h1>{this.state.comments.length} Comments</h1>
                 </div>
+                <br/>
                 <div>
                     {/* <img src={this.state.userInfo.picture} alt='user'></img>
                     <input placeholder='Add a public comment...'></input> */}
-                </div>
                     {comment}
+                </div>
                 <div>
                     {commentsDisplay}
                 </div>

@@ -7,6 +7,8 @@ import likedIcon from './like.svg'
 import dislikedIcon from './dislike.svg'
 import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
+
 
 class Video extends Component {
     constructor() {
@@ -14,19 +16,28 @@ class Video extends Component {
         this.state = {
             videos: [],
             showVid: {},
-            clickedLike: false,
-            clickedDislike: false,
+            author: '',
+            img: '',
+            description: '',
+            viewCount: 0,
             likeCount: 0,
-            dislikeCount: 0
+            dislikeCount: 0,
+            signedIn: false,
+            userInfo: {},
+            viewed: false,
+            duration: 0
         }
+        this.addView = this.addView.bind(this)
     }
 
     componentDidMount() {
         this.getVideo()
         this.getLikes()
-        this.getDislikes()   
+        this.getDislikes()
+        this.getUser()        
     }
 
+    
     componentDidUpdate(prevProps){
         if(prevProps !== this.props){
             this.getVideo()
@@ -35,10 +46,27 @@ class Video extends Component {
         }
     }
 
+    getUser = () => {
+        axios.get('/api/userinfo').then(res => {
+            console.log("hello", res.data)
+            if (res.data.user_id) {
+                this.setState({
+                    signedIn: true,
+                    userInfo: res.data
+                })
+            }
+        })
+    }
+
     getVideo = () => {
         axios.get(`/api/video/${this.props.match.params.id}`).then(res => {
+            console.log(6666, res.data)
             this.setState({
-                showVid: res.data[0]
+                showVid: res.data[0],
+                viewCount: res.data[0].view_count,
+                author: res.data[0].channel_name,
+                img: res.data[0].user_img,
+                description: res.data[0].video_desc
             })
             let category = res.data[0].category
             axios.get(`/api/video-categories/${category}/${this.props.match.params.id}`).then(res => {
@@ -70,23 +98,58 @@ class Video extends Component {
     likeVideo = () => {
         let video_id = this.props.match.params.id
         let likeDislike = true
+<<<<<<< HEAD
         console.log(video_id)
         axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
             this.getLikes()
             this.getDislikes()
         })
+=======
+        let {signedIn} = this.state
+        if(!signedIn){
+            Swal ({
+                type: 'warning',
+                title: 'Oops',
+                text: 'Sign in to access this feature'
+            })
+        } else {
+            axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                this.getLikes()
+                this.getDislikes()
+            })
+        }
+>>>>>>> master
     }
 
     dislikeVideo = () => {
         let video_id = this.props.match.params.id
         let likeDislike = false
-        axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
-            this.getLikes()
-            this.getDislikes()
-        })
+        let {signedIn} = this.state
+        if(!signedIn){
+            Swal ({
+                type: 'warning',
+                title: 'Oops',
+                text: 'Sign in to access this feature'
+            })
+        } else {
+            axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                this.getLikes()
+                this.getDislikes()
+            })
+        }
     }
 
-
+    addView(){
+        let {video_id} = this.state.showVid
+        let {viewed} = this.state
+        if(!viewed){
+            axios.put('/api/view-count', {video_id})
+                .then( (res) => {
+                    let {view_count} = res.data[0]
+                    this.setState({viewCount: view_count, viewed: true})
+                })
+        }
+    }
 
     render() {
         console.log(this.props)
@@ -99,10 +162,11 @@ class Video extends Component {
             }
             return (
                 <div className='suggested-list' key={i}>
-                    <Link to={`/video/${list.video_id}`}><video id="thumbnail" src={list.video_url}></video></Link>
+                    <Link to={`/video/${list.video_id}`}><video id="thumbnail" className="asdf123" src={list.video_url}></video></Link>
                     <div className='category-desc'>
                         <h4>{list.title}</h4>
                         <p id="sug-auth">{user}</p>
+                        <p>{list.duration}</p>
                         <p id="sug-v-count">{list.view_count} views</p>
                     </div>
                 </div>
@@ -112,10 +176,10 @@ class Video extends Component {
         return (
             <div className="Video">
                 <div className="player">
-                    <video className="vid" controls src={this.state.showVid.video_url}></video>
+                    <video className="vid" controls src={this.state.showVid.video_url} onPlay={this.addView} ></video>
                     <h4 id="titulo">{this.state.showVid.title}</h4>
                     <div className="views-n-likes">
-                        <span><p>{this.state.showVid.view_count} views</p></span>
+                        <span><p id="xxxx">{this.state.viewCount} views</p></span>
                         <div className="likes">
                             <div className="likebox">
                                 <button onClick={this.likeVideo} id="like-button"> <img src={pic2} alt="" /></button>
@@ -127,19 +191,22 @@ class Video extends Component {
                             </div>
                         </div>
                     </div>
+                    <div id="line-thing"></div>
                     <div className="author-n-descrip">
-                        <div>
+                        <div className="upperTier">
                             <div className="user-piccc">
-                                img
+                                <img id="com-pic" src={this.state.img} alt=""/>
                             </div>
                             <div className="author-area">
-                                author
+                                <h3 id="author-text">{this.state.author}</h3>
                             </div>
                         </div>
                         <div className="vid-description">
-                            descrip3
+                            {this.state.description}
                         </div>
                     </div>
+                    <br/>
+                    <div id="line-thing"></div>
                     <Comments video_id={this.props.match.params.id}/>
                 </div>
                 <div className='category-list'>

@@ -5,7 +5,11 @@
     height: 56px;
     /* border-bottom: 1px solid gray; */
     padding: 0 16px;
-    background: rgb(255, 255, 255)
+    background: rgb(255, 255, 255);
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100vw;
 }
 .hamburger{
     border: none;
@@ -15,6 +19,7 @@
     font-size: 24px;
 }
 .search-button {
+    background: rgb(245, 245, 245);
     width: 65px;
     height: 30px;
     border-radius: 0 2px 2px 0; 
@@ -47,6 +52,7 @@
     height: 30px;
     border-radius: 1px 0 0 1px;
     border: 1px solid rgb(206, 206, 206);
+    font-size: 15px;
     
 }
 #youtube {
@@ -177,4 +183,8 @@
 
 .menu-icon:hover {
     cursor: pointer;
+}
+
+.swal2-popup .swal2-styled.swal2-confirm {
+    background-color: rebeccapurple !important;
 }

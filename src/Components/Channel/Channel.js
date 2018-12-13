@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './Channel.css';
+import Swal from 'sweetalert2';
 
 class Channel extends Component {
     constructor(){
@@ -25,13 +26,18 @@ class Channel extends Component {
     getUser = () => {
         axios.get('/api/userinfo')
         .then( (res) => {
-            if(res.data.channel_name){
-                this.setState({
-                    userInfo: res.data,
-                    channelName: res.data.channel_name
+            this.setState({userInfo: res.data})
+            if(!res.data.user_id){
+                Swal ({
+                    type: 'warning',
+                    title: 'Oops',
+                    text: 'Sign in to access this feature',
+                    onClose: () => {
+                        this.props.history.push('/')
+                    }
                 })
-            } else {
-                this.setState({userInfo: res.data})
+            } else if(res.data.channel_name){
+                this.setState({channelName: res.data.channel_name})
             }
           this.getVideos()
         })
