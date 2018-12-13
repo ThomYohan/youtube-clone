@@ -30,6 +30,9 @@ button {
 button:focus{
 	outline: none;
 }
+input:focus{
+	outline: none;
+}
 a {
 	text-decoration: none;
 	color: black;
@@ -57,7 +60,7 @@ table {
 }
 .App {
 	font-family: 'Roboto', sans-serif;
-	background: rgb(250, 250, 250);
+	background: rgb(250,250,250);
 	height: 100vh;
 }
 * {

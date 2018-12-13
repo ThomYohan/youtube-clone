@@ -18,14 +18,21 @@ class Home extends Component {
             })
         })
     }
-
+    
     render(){
+        
         let videosDisplay = this.state.videos.map((video, i) => {
+            let user = ''
+            if(video.channel_name){
+                user = video.channel_name
+            } else {
+                user = `${video.first_name} ${video.last_name}`
+            }
             return (
                 <div className="videoz" key={i}>
                     <Link to={`/video/${video.video_id}`}><video id="thumbnail" src={video.video_url}></video></Link>
                     <h4>{video.title}</h4>
-                    <p id="vid-author">Author</p>
+                    <p id="vid-author">{user}</p>
                     <p id="view-count">{video.view_count} views</p>
                 </div>
             )

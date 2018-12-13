@@ -95,7 +95,7 @@ class Upload extends Component {
     axios.post('/api/upload', {url, user_id, category, title, video_desc, thumbnail})
         .then( () => console.log('successfully saved video info to db'))
         .catch( err => console.log(err))
-    event.prevenDefault();
+    event.preventDefault();
   }
 
   render() {
@@ -142,7 +142,7 @@ class Upload extends Component {
             <option value="news">News</option>
             <option value="other">Other</option>          
           </select>
-          <input required type="text" placeholder="Title... (Max 50)" name="title" onChange={this.handleInput} className='title' maxLength="50" />
+          <input required type="text" placeholder="Title... (Max 80)" name="title" onChange={this.handleInput} className='title' maxLength="80" />
           <textarea type="text" placeholder="Description..." name="video_desc" className='description' onChange={this.handleInput} />
           <input className='submit' type="submit" value="Submit" />
         </form>

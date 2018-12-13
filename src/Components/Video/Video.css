@@ -1,5 +1,7 @@
 .Video {
     display: flex;
+    background: rgb(250,250,250);
+    min-height: 100vh;
 }
 .vid{
     width: 763px;
@@ -8,7 +10,6 @@
 .player{
     margin-left: 24px;
     padding: 24px 0 0 24px;
-    /* border: 1px solid purple; */
     width: 770px;
     height: 100vh;
 }
@@ -21,7 +22,6 @@
     display: flex;
     align-items: center;
     width: 100%;
-    border: 1px solid green;
 }
 .likes {
     display: flex;
@@ -45,18 +45,17 @@
     border: none;
 }
 .category-list {
-    height: 100vh;
-    width: 436px;
-    border: 1px solid red;
-    margin: 24px 0 0 24px;
+    /* min-height: 1000px; */
+    width: 426px;
+    /* border: 1px solid red; */
+    margin: 24px 0 0 38px;
+    background: rgb(250,250,250);
 }
 .suggested-list {
     display: flex;
-    height: 145px;
+    height: 135px;
     width: 95%;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 .suggested-list>video {
     height: 117px;
@@ -64,11 +63,29 @@
 }
 .category-desc {
     height: 117px;
-    width: 250px;
+    width: 208px;
     padding-right: 24px;
-    margin-left: 5px;
-    border: 1px solid purple;
+    margin-left: 7px;
+    /* border: 1px solid purple; */
 }
 .category-desc>h4{
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 210px;
+}
+#sug-auth { 
+    font-weight: 300;
+    line-height: 1.7rem;
+    text-transform: none;
+    color: grey;
+    font-size: .9rem;
+}
+#sug-v-count {
+    font-weight: 300;
+    line-height: 1.1rem;
+    text-transform: none;
+    color: grey;
+    font-size: .9rem;
 }

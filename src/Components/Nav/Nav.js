@@ -96,7 +96,7 @@ class Nav extends Component {
                         <input id="search-field" value={this.state.searchField} onChange={this.handleSearch} type="text" placeholder="Search" />
                     </div>
                     <div>
-                    <Link to={`/search/${this.state.searchField}`}><button type='submit'className="search-button"><img src={pic} alt=""/></button></Link>
+                    <Link to={`/search/${this.state.searchField}`}><button className="search-button"><img id="mag-glass" src={pic} alt=""/></button></Link>
                     </div>
                 </div>
 
@@ -104,7 +104,7 @@ class Nav extends Component {
                     <div>
                         <Link to='/upload'>
                             <button className="add-video">
-                                <img src={pic2} alt="" /></button>
+                                <img id="upload-icon" src={pic2} alt="" /></button>
                         </Link>
                     </div>
                     <div>
@@ -126,7 +126,7 @@ class Nav extends Component {
                                                 <div className='user-email' >{this.state.email}</div>
                                             </div>
                                         </div>
-                                        <Link to='/channel'><div className='menu-channel'>
+                                        <Link onClick={() => this.toggleUserMenu()} to='/channel'><div className='menu-channel'>
                                             <div className='menu-icon'>
                                                 <i className="fas fa-user"></i>
                                             </div>

@@ -3,6 +3,8 @@ import axios from 'axios';
 import './Video.css';
 import pic from './icons8-facebook-dislike-24.svg';
 import pic2 from './icons8-facebook-like-24.png';
+import likedIcon from './like.svg'
+import dislikedIcon from './dislike.svg'
 import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
 
@@ -12,6 +14,8 @@ class Video extends Component {
         this.state = {
             videos: [],
             showVid: {},
+            clickedLike: false,
+            clickedDislike: false,
             likeCount: 0,
             dislikeCount: 0
         }
@@ -20,8 +24,7 @@ class Video extends Component {
     componentDidMount() {
         this.getVideo()
         this.getLikes()
-        this.getDislikes()
-        
+        this.getDislikes()   
     }
 
     componentDidUpdate(prevProps){
@@ -71,7 +74,6 @@ class Video extends Component {
         axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
             this.getLikes()
             this.getDislikes()
-
         })
     }
 
@@ -89,13 +91,19 @@ class Video extends Component {
     render() {
         console.log(this.props)
         let categoryList = this.state.videos.map((list, i) => {
+            let user = ''
+            if(list.channel_name){
+                user = list.channel_name
+            } else {
+                user = `${list.first_name} ${list.last_name}`
+            }
             return (
                 <div className='suggested-list' key={i}>
                     <Link to={`/video/${list.video_id}`}><video id="thumbnail" src={list.video_url}></video></Link>
                     <div className='category-desc'>
                         <h4>{list.title}</h4>
-                        <p>Author</p>
-                        <p>{list.view_count}</p>
+                        <p id="sug-auth">{user}</p>
+                        <p id="sug-v-count">{list.view_count} views</p>
                     </div>
                 </div>
             )
@@ -110,13 +118,26 @@ class Video extends Component {
                         <span><p>{this.state.showVid.view_count} views</p></span>
                         <div className="likes">
                             <div className="likebox">
-                                <button onClick={this.likeVideo} id="like-button"><img src={pic2} alt="" /></button>
+                                <button onClick={this.likeVideo} id="like-button"> <img src={pic2} alt="" /></button>
                                 <p>{this.state.likeCount}</p>
                             </div>
                             <div className="dislikebox">
                                 <button onClick={this.dislikeVideo} id="dislike-button"><img src={pic} alt="" /></button>
                                 <p>{this.state.dislikeCount}</p>
                             </div>
+                        </div>
+                    </div>
+                    <div className="author-n-descrip">
+                        <div>
+                            <div className="user-piccc">
+                                img
+                            </div>
+                            <div className="author-area">
+                                author
+                            </div>
+                        </div>
+                        <div className="vid-description">
+                            descrip3
                         </div>
                     </div>
                     <Comments video_id={this.props.match.params.id}/>

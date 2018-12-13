@@ -109,16 +109,19 @@ app.get('/api/by-user/:id', controller.getVideosByUser)
 app.get('/api/video-categories/:category/:id', controller.getVidoesByCategory)
 app.get('/api/by-view', controller.getVidoesByViews)
 app.get('/api/video/:id', controller.getOne)
-app.post('/api/upload', controller.upload)
 app.get('/api/comments/:video_id', controller.getComments)
 app.get('/api/get-likes/:id', controller.getLikes)
 app.get('/api/get-dislikes/:id', controller.getDislikes)
-app.post('/api/like-dislike', controller.like_dislike)
-app.post('/api/createcomment', controller.createComment)
+app.get('/api/userinfo', controller.getUser)
 
 app.post('/api/search', controller.searchVideos)
-app.get('/api/userinfo', controller.getUser)
+app.post('/api/createcomment', controller.createComment)
+app.post('/api/like-dislike', controller.like_dislike)
+app.post('/api/upload', controller.upload)
 app.post('/api/auth/signout', controller.signout)
 
+app.put('/api/channel-name', controller.updateChannel)
+
+app.delete('/api/delete/:video_id', controller.deleteVideo)
 
 app.listen(SERVER_PORT, () => console.log(`Listening on port: ${SERVER_PORT}`)) 
