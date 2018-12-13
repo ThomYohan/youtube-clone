@@ -160,5 +160,12 @@ module.exports = {
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
             })
+    },
+    redirectUrl: (req,res)=>{
+        const {redirecturl} = req.body
+        req.session.cookie.redirecturl = redirecturl
+        // req.session.redirecturl = redirecturl
+        console.log(req.session)
+        res.status(200)
     }
 }

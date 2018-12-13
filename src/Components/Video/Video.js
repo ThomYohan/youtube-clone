@@ -119,7 +119,7 @@ class Video extends Component {
                             </div>
                         </div>
                     </div>
-                    <Comments video_id={this.props.match.params.id}/>
+                    <Comments video_id={this.props.match.params.id} match={this.props.location.pathname}/>
                 </div>
                 <div className='category-list'>
                     {categoryList}

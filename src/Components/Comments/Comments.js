@@ -12,6 +12,7 @@ class Comments extends Component {
             commentInput: ''
         }
         this.createComment = this.createComment.bind(this)
+        this.signIn = this.signIn.bind(this)
     }
     componentDidMount() {
         this.getComments()
@@ -25,6 +26,12 @@ class Comments extends Component {
         if(prevProps.video_id !== this.props.video_id){
             this.getComments()
         }
+    }
+    signIn() {
+        let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
+        let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
+        document.cookie = `redirecturl=${this.props.match};`
+        window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
     }
     getComments = () => {
         axios.get(`/api/comments/${this.props.video_id}`).then(res => {
@@ -48,8 +55,9 @@ class Comments extends Component {
         }))
     }
     render() {
+        console.log(this.props.match)
         let commentsDisplay = this.state.comments.map((comment, i) => {
-            return (<div key={i}>
+            return (<div className='video-comments' key={i}>
                 <div>
                     <div><img src={comment.user_img } alt="user"></img></div>
                 </div>
@@ -69,17 +77,13 @@ class Comments extends Component {
         }
         else {
             comment = <div>
-                <p>Please Login to post a comment.</p>
+                <button onClick={this.signIn}>Login to post a comment.</button>
             </div>
         }
         return (
-            <div className='comments'>
-                <div>
-                    <h1>Comments: {this.state.comments.length}</h1>
-                </div>
-                <div>
-                    <img src={this.state.userInfo.picture} alt='user'></img>
-                    <input placeholder='Add a public comment...'></input>
+            <div className='comments-main-container'>
+                <div className='comment-count'>
+                    <h1>{this.state.comments.length} Comments</h1>
                 </div>
                     {comment}
                 <div>
