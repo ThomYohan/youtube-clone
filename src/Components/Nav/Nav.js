@@ -27,9 +27,8 @@ class Nav extends Component {
 
     signIn() {
         let { REACT_APP_DOMAIN, REACT_APP_CLIENT_ID } = process.env;
-
         let uri = `${encodeURIComponent(window.location.origin)}/auth/callback`
-
+        document.cookie = `redirecturl=${this.props.match};`
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
     }
 
@@ -54,7 +53,6 @@ class Nav extends Component {
 
     getUser = () => {
         axios.get('/api/userinfo').then(res => {
-            console.log(res)
             if (res.data !== '') {
                 this.setState({
                     signedIn: true,
@@ -91,6 +89,7 @@ class Nav extends Component {
     }
 
     render() {
+        console.log(window.location.href)
         return (
             <div className='nav'>
                 <div className="menu2">

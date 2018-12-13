@@ -136,7 +136,7 @@ module.exports = {
         const { video_id } = req.body
 
         db.increase_viewcount([video_id])
-            .then( (view_count) => {
+            .then((view_count) => {
                 console.log(view_count)
                 res.status(200).send(view_count)
             })
@@ -165,23 +165,23 @@ module.exports = {
         const db = req.app.get('db')
         let { id } = req.params
 
-        db.get_videos_by_user([ id ])
-            .then( videos => {
+        db.get_videos_by_user([id])
+            .then(videos => {
                 res.status(200).send(videos)
             })
-            .catch( err => {
-                res.status(500).send({ errorMessage: "Something went wrong"})
+            .catch(err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
             })
     },
     updateChannel: (req, res, next) => {
         const db = req.app.get('db')
-        let {user_id, channelName} = req.body
+        let { user_id, channelName } = req.body
         console.log(user_id, channelName)
 
         db.update_channel([user_id, channelName])
-            .then( () => res.sendStatus(200))
-            .catch( (err) => {
-                res.status(500).send({ errorMessage: "Something went wrong"})
+            .then(() => res.sendStatus(200))
+            .catch((err) => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
             })
     },
     signout: (req, res) => {
