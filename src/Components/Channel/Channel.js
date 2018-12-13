@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import './Channel.css';
 import Swal from 'sweetalert2';
+import {disable} from '../Logic/Logic'
 
 class Channel extends Component {
     constructor(){
@@ -58,8 +59,8 @@ class Channel extends Component {
 
     handleEditClick = () => {
         this.setState({
-            disable: !this.state.disable,
-            showSave: !this.state.showSave
+            disable: disable(this.state.disable),
+            showSave: disable(this.state.showSave)
         })
     }
     
@@ -70,8 +71,8 @@ class Channel extends Component {
         console.log(user_id, channelName)
         axios.put('/api/channel-name', {user_id, channelName}).then(res => {
             this.setState({
-                disable: !this.state.disable,
-                showSave: !this.state.showSave
+                disable: disable(this.state.disable),
+                showSave: disable(this.state.showSave)
             })
         });
     }
@@ -108,6 +109,7 @@ class Channel extends Component {
                         <div className="upload-page-video-info">
                             <p id="vid-author">Uploaded by You</p>
                             <p id="view-count">{video.view_count} views</p>
+                            <p id="vid-duration">{video.duration}</p>
                         </div>
                         <button className="delete-btn" onClick={ () => this.deleteVideo(video)} >Delete</button>
                 </div>
