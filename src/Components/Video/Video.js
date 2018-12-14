@@ -142,7 +142,6 @@ class Video extends Component {
     }
 
     render() {
-        console.log(this.props)
         let categoryList = this.state.videos.map((list, i) => {
             let user = ''
             if(list.channel_name){
@@ -197,7 +196,7 @@ class Video extends Component {
                     </div>
                     <br/>
                     <div id="line-thing"></div>
-                    <Comments video_id={this.props.match.params.id}/>
+                    <Comments video_id={this.props.match.params.id} match={this.props.location.pathname}/>
                 </div>
                 <div className='category-list'>
                     {categoryList}

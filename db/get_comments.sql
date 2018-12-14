@@ -3,6 +3,7 @@ select
    u.last_name,
    u.channel_name,
    u.user_img,
+   u.user_id,
    c.comment_id,
    c.comment
 from comment c
