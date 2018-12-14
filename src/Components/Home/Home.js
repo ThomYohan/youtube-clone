@@ -56,6 +56,7 @@ class Home extends Component {
                     <h4>{video.title}</h4>
                     <p id="vid-author">{user}</p>
                     <p id="view-count">{video.view_count} views</p>
+                    <p id="vid-duration">{video.duration}</p>
                 </div>
             )
         })
@@ -73,6 +74,7 @@ class Home extends Component {
                     <h4>{music.title}</h4>
                     <p id="vid-author">{user}</p>
                     <p id="view-count">{music.view_count} views</p>
+                    <p id="vid-duration">{music.duration}</p>
                 </div>
             )
         })
@@ -90,6 +92,7 @@ class Home extends Component {
                     <h4>{sport.title}</h4>
                     <p id="vid-author">{user}</p>
                     <p id="view-count">{sport.view_count} views</p>
+                    <p id="vid-duration">{sport.duration}</p>
                 </div>
             )
         })
