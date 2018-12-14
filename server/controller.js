@@ -105,7 +105,7 @@ module.exports = {
         const db = req.app.get('db')
         const { video_id, comment, user_id } = req.body
         db.create_comment([video_id, comment, user_id])
-            .then(() => res.sendStatus(200))
+            .then((comments) => res.status(200).send(comments))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
@@ -123,13 +123,11 @@ module.exports = {
     },
     deleteComment: (req, res) => {
         const db = req.app.get('db')
-        const { comment_id, user_id } = req.body
-        db.delete_comment([id])
-            .then(() => res.sendStatus(200))
-            .catch(err => {
-                res.status(500).send({ errorMessage: "Something went wrong" })
-                console.log(err)
-            })
+        console.log(req.params)
+        const { comment_id, user_id, video_id } = req.params
+        db.delete_comment([comment_id,user_id,video_id]).then(comments=>{
+            console.log(comments)
+            res.status(200).send(comments)})
     },
     viewCount: (req, res) => {
         const db = req.app.get('db')

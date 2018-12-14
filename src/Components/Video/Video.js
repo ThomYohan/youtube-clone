@@ -46,7 +46,6 @@ class Video extends Component {
 
     getUser = () => {
         axios.get('/api/userinfo').then(res => {
-            console.log("hello", res.data)
             if (res.data.user_id) {
                 this.setState({
                     signedIn: true,
@@ -58,7 +57,6 @@ class Video extends Component {
 
     getVideo = () => {
         axios.get(`/api/video/${this.props.match.params.id}`).then(res => {
-            console.log(6666, res.data)
             this.setState({
                 showVid: res.data[0],
                 viewCount: res.data[0].view_count,
@@ -76,7 +74,6 @@ class Video extends Component {
     }
 
     getLikes = () => {
-        console.log(this.props.match.params.id)
         axios.get(`/api/get-likes/${this.props.match.params.id}`).then(res => {
             this.setState({
                 likeCount: res.data[0].count
@@ -86,7 +83,6 @@ class Video extends Component {
 
     getDislikes = () => {
         axios.get(`/api/get-dislikes/${this.props.match.params.id}`).then(res => {
-            console.log(res.data)
             this.setState({
                 dislikeCount: res.data[0].count
             })
@@ -142,7 +138,6 @@ class Video extends Component {
     }
 
     render() {
-        console.log(this.props)
         let categoryList = this.state.videos.map((list, i) => {
             let user = ''
             if(list.channel_name){
@@ -197,7 +192,7 @@ class Video extends Component {
                     </div>
                     <br/>
                     <div id="line-thing"></div>
-                    <Comments video_id={this.props.match.params.id}/>
+                    <Comments video_id={this.props.match.params.id} match={this.props.location.pathname}/>
                 </div>
                 <div className='category-list'>
                     {categoryList}
