@@ -3,8 +3,6 @@ import axios from 'axios';
 import './Video.css';
 import pic from './icons8-facebook-dislike-24.svg';
 import pic2 from './icons8-facebook-like-24.png';
-import likedIcon from './like.svg'
-import dislikedIcon from './dislike.svg'
 import Comments from '../Comments/Comments';
 import {Link} from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -25,7 +23,9 @@ class Video extends Component {
             signedIn: false,
             userInfo: {},
             viewed: false,
-            duration: 0
+            duration: 0,
+            likedVideo: true,
+            dislikedVideo: false
         }
         this.addView = this.addView.bind(this)
     }
@@ -48,7 +48,6 @@ class Video extends Component {
 
     getUser = () => {
         axios.get('/api/userinfo').then(res => {
-            console.log("hello", res.data)
             if (res.data.user_id) {
                 this.setState({
                     signedIn: true,
@@ -60,7 +59,6 @@ class Video extends Component {
 
     getVideo = () => {
         axios.get(`/api/video/${this.props.match.params.id}`).then(res => {
-            console.log(6666, res.data)
             this.setState({
                 showVid: res.data[0],
                 viewCount: res.data[0].view_count,
@@ -78,7 +76,6 @@ class Video extends Component {
     }
 
     getLikes = () => {
-        console.log(this.props.match.params.id)
         axios.get(`/api/get-likes/${this.props.match.params.id}`).then(res => {
             this.setState({
                 likeCount: res.data[0].count
@@ -88,7 +85,6 @@ class Video extends Component {
 
     getDislikes = () => {
         axios.get(`/api/get-dislikes/${this.props.match.params.id}`).then(res => {
-            console.log(res.data)
             this.setState({
                 dislikeCount: res.data[0].count
             })
@@ -98,13 +94,6 @@ class Video extends Component {
     likeVideo = () => {
         let video_id = this.props.match.params.id
         let likeDislike = true
-<<<<<<< HEAD
-        console.log(video_id)
-        axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
-            this.getLikes()
-            this.getDislikes()
-        })
-=======
         let {signedIn} = this.state
         if(!signedIn){
             Swal ({
@@ -114,11 +103,11 @@ class Video extends Component {
             })
         } else {
             axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                console.log(1, res)
                 this.getLikes()
-                this.getDislikes()
+                this.getDislikes()       
             })
         }
->>>>>>> master
     }
 
     dislikeVideo = () => {
@@ -133,6 +122,7 @@ class Video extends Component {
             })
         } else {
             axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                console.log(2, res)
                 this.getLikes()
                 this.getDislikes()
             })
