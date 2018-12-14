@@ -61,7 +61,7 @@ table {
 .App {
 	font-family: 'Roboto', sans-serif;
 	background: rgb(250,250,250);
-	height: 100vh;
+	min-height: 100vh;
 }
 * {
 	box-sizing: border-box;
