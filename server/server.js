@@ -18,7 +18,7 @@ const {
     CLIENT_SECRET,
     CONNECTION_STRING,
     SECRET,
-    AUTH_PROTOCAL,
+    AUTH_PROTOCOL,
     AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY,
     AWS_REGION,
@@ -42,7 +42,7 @@ app.get('/auth/callback', async (req, res) => {
         client_secret: CLIENT_SECRET,
         code: req.query.code,
         grant_type: 'authorization_code',
-        redirect_uri: `${AUTH_PROTOCAL}://${req.headers.host}/auth/callback`
+        redirect_uri: `${AUTH_PROTOCOL}://${req.headers.host}/auth/callback`
     }
 
 
