@@ -105,7 +105,7 @@ module.exports = {
         const db = req.app.get('db')
         const { video_id, comment, user_id } = req.body
         db.create_comment([video_id, comment, user_id])
-            .then(() => res.sendStatus(200))
+            .then((comments) => res.status(200).send(comments))
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
@@ -123,20 +123,18 @@ module.exports = {
     },
     deleteComment: (req, res) => {
         const db = req.app.get('db')
-        const { comment_id, user_id } = req.body
-        db.delete_comment([id])
-            .then(() => res.sendStatus(200))
-            .catch(err => {
-                res.status(500).send({ errorMessage: "Something went wrong" })
-                console.log(err)
-            })
+        console.log(req.params)
+        const { comment_id, user_id, video_id } = req.params
+        db.delete_comment([comment_id,user_id,video_id]).then(comments=>{
+            console.log(comments)
+            res.status(200).send(comments)})
     },
     viewCount: (req, res) => {
         const db = req.app.get('db')
         const { video_id } = req.body
 
         db.increase_viewcount([video_id])
-            .then( (view_count) => {
+            .then((view_count) => {
                 console.log(view_count)
                 res.status(200).send(view_count)
             })
@@ -165,23 +163,23 @@ module.exports = {
         const db = req.app.get('db')
         let { id } = req.params
 
-        db.get_videos_by_user([ id ])
-            .then( videos => {
+        db.get_videos_by_user([id])
+            .then(videos => {
                 res.status(200).send(videos)
             })
-            .catch( err => {
-                res.status(500).send({ errorMessage: "Something went wrong"})
+            .catch(err => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
             })
     },
     updateChannel: (req, res, next) => {
         const db = req.app.get('db')
-        let {user_id, channelName} = req.body
+        let { user_id, channelName } = req.body
         console.log(user_id, channelName)
 
         db.update_channel([user_id, channelName])
-            .then( () => res.sendStatus(200))
-            .catch( (err) => {
-                res.status(500).send({ errorMessage: "Something went wrong"})
+            .then(() => res.sendStatus(200))
+            .catch((err) => {
+                res.status(500).send({ errorMessage: "Something went wrong" })
             })
     },
     signout: (req, res) => {

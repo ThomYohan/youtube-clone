@@ -39,6 +39,7 @@ class Search extends Component {
                         <h3>{vids.title}</h3>
                         <p id="search-views">{vids.view_count} views</p>
                         <p id="search-descrip">{vids.video_desc}</p>
+                        <p id="vids-dur">{vids.duration}</p>
                     </div>
                 </div>
             )
