@@ -37,7 +37,10 @@ class Search extends Component {
                         <Link to={`/video/${vids.video_id}`}><video id="thumbnail" src={vids.video_url}></video></Link>
                     <div className="title-descrip">
                         <h3>{vids.title}</h3>
-                        <p id="search-views">{vids.view_count} views</p>
+                        <div className="what-what">
+                            <p id="search-auth">{vids.channel_name}</p>
+                            <p id="search-views">{vids.view_count} views</p>
+                        </div>
                         <p id="search-descrip">{vids.video_desc}</p>
                         <p id="vids-dur">{vids.duration}</p>
                     </div>

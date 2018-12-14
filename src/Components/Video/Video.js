@@ -165,7 +165,7 @@ class Video extends Component {
         return (
             <div className="Video">
                 <div className="player">
-                    <video className="vid" controls src={this.state.showVid.video_url} onPlay={this.addView} ></video>
+                    <video className="vid" autoplay="true" controls src={this.state.showVid.video_url} onPlay={this.addView} ></video>
                     <h4 id="titulo">{this.state.showVid.title}</h4>
                     <div className="views-n-likes">
                         <span><p id="xxxx">{this.state.viewCount} views</p></span>
