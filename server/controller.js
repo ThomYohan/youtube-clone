@@ -33,7 +33,7 @@ module.exports = {
     upload: (req, res) => {
         const db = req.app.get('db')
         const { url, user_id, category, title, video_desc, thumbnail, strDuration } = req.body
-        console.log(strDuration)
+        // console.log(strDuration)
         db.upload_video([url, user_id, category, title, video_desc, thumbnail, strDuration])
             .then(() => res.sendStatus(200))
             .catch(err => {
@@ -123,10 +123,10 @@ module.exports = {
     },
     deleteComment: (req, res) => {
         const db = req.app.get('db')
-        console.log(req.params)
+        // console.log(req.params)
         const { comment_id, user_id, video_id } = req.params
         db.delete_comment([comment_id,user_id,video_id]).then(comments=>{
-            console.log(comments)
+            // console.log(comments)
             res.status(200).send(comments)})
     },
     viewCount: (req, res) => {
@@ -135,7 +135,7 @@ module.exports = {
 
         db.increase_viewcount([video_id])
             .then((view_count) => {
-                console.log(view_count)
+                // console.log(view_count)
                 res.status(200).send(view_count)
             })
             .catch(err => {
@@ -174,7 +174,7 @@ module.exports = {
     updateChannel: (req, res, next) => {
         const db = req.app.get('db')
         let { user_id, channelName } = req.body
-        console.log(user_id, channelName)
+        // console.log(user_id, channelName)
 
         db.update_channel([user_id, channelName])
             .then(() => res.sendStatus(200))
