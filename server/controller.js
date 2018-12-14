@@ -150,7 +150,7 @@ module.exports = {
         const db = req.app.get('db')
         let { searchString } = req.body
 
-        const query = `SELECT * FROM video WHERE title ILIKE '%${searchString}%' OR category ILIKE '%${searchString}%' ORDER BY view_count DESC`
+        const query = `SELECT * FROM video v JOIN user_info u on u.user_id = v.user_id WHERE title ILIKE '%${searchString}%' OR category ILIKE '%${searchString}%' ORDER BY view_count DESC`
         db.query(query)
             .then((videos) => {
                 res.status(200).send(videos)

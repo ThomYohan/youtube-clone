@@ -3,7 +3,8 @@
 }
 .comments-main {
     display: flex;
-    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 90%;
 }
 #com-pic {
     width: 50px;
@@ -12,6 +13,7 @@
 }
 .author-n-com {
     margin-left: 10px;
+    width: 90%;
 }
 #com-author {
     font-weight: bold;
@@ -30,4 +32,37 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 10px;
+    margin-bottom: 20px;
+}
+#com-delete {
+    width: 110px;
+    background: rebeccapurple;
+    color: white;
+    margin-top: 5px;
+    border-radius: 2px;
+    border: none;
+}
+.comment-area {
+    max-width: 100%;
+    height: auto;
+}
+#button-add-com {
+    position: relative;
+    left: 630px;
+    bottom: 10px;
+    border-radius: 2px;
+    font-weight: bold;
+}
+.log-comment {
+    position: relative;
+    left: 320px;
+    bottom: 20px;
+}
+#log-com-button {
+    width: 160px;
+    padding: 5px;
+    background: rebeccapurple;
+    color: white;
+    border-radius: 2px;
+    border: none;
 }
