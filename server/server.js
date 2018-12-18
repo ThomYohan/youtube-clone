@@ -18,12 +18,13 @@ const {
     CLIENT_SECRET,
     CONNECTION_STRING,
     SECRET,
-    AUTH_PROTOCAL,
+    AUTH_PROTOCOL,
     AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY,
     AWS_REGION,
     S3_BUCKET
 } = process.env;
+
 
 massive(CONNECTION_STRING).then(db => app.set('db', db))
 
@@ -42,9 +43,8 @@ app.get('/auth/callback', async (req, res) => {
         client_secret: CLIENT_SECRET,
         code: req.query.code,
         grant_type: 'authorization_code',
-        redirect_uri: `${AUTH_PROTOCAL}://${req.headers.host}/auth/callback`
+        redirect_uri: `${AUTH_PROTOCOL}://${req.headers.host}/auth/callback`
     }
-
 
     // auth0 sending code in req.query.code
     let tokenRes = await axios.post(`https://${REACT_APP_DOMAIN}/oauth/token`, payload)

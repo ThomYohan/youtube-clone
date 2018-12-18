@@ -3,7 +3,9 @@ module.exports = {
         const db = req.app.get('db')
         const { id } = req.params
         db.get_video([id])
-            .then((video) => res.status(200).send(video))
+            .then((video) => {
+                res.status(200).send(video)
+            })
             .catch(err => {
                 res.status(500).send({ errorMessage: "Something went wrong" })
                 console.log(err)
