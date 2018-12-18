@@ -76,7 +76,7 @@ class Comments extends Component {
             let deleteButton = <div></div>
             if (comment.user_id === this.state.userInfo.user_id) {
                 deleteButton = <div>
-                    <button id="com-delete" onClick={() => this.deleteComment(comment.comment_id, this.state.userInfo.user_id)}>Delete Comment</button>
+                    <button  id="com-delete" onClick={() => this.deleteComment(comment.comment_id, this.state.userInfo.user_id)}>Delete Comment</button>
                 </div>
             }
             return (
@@ -86,8 +86,8 @@ class Comments extends Component {
                     </div>
                     <div className="author-n-com">
                         <h3 id="com-author">{comment.first_name} {comment.last_name}</h3>
-                        <div>{comment.comment}</div>
-                        {deleteButton}
+                        <p class="comment-area">{comment.comment}</p>
+                        <div>{deleteButton}</div>
                     </div>
                 </div>
             )
@@ -99,12 +99,12 @@ class Comments extends Component {
                     <img id="com-pic" src={this.state.userInfo.user_img} alt='user'></img>
                 </div>
                 <input id="comment-field" onChange={e => this.handleCommentInput(e)} value={this.state.commentInput} placeholder={this.state.commentPlaceHolder}></input>
-                <button onClick={this.createComment}>Add Comment</button>
+                <button id="button-add-com" onClick={this.createComment}>Add Comment</button>
             </div>
         }
         else {
-            comment = <div>
-                <button onClick={this.signIn}>Login to post a comment.</button>
+            comment = <div className="log-comment">
+                <button id="log-com-button" onClick={this.signIn}>Login to post a comment</button>
             </div>
         }
         return (

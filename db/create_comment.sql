@@ -13,3 +13,4 @@ from comment c
 JOIN user_info u
 ON u.user_id = c.user_id
 where video_id = $1
+ORDER BY c.comment_id DESC;

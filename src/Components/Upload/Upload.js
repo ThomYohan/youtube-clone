@@ -107,16 +107,27 @@ class Upload extends Component {
     let vid = document.getElementById('uploaded-video-thumbnail')
     console.log(vid.duration)
     let {duration} = vid
-    let minutes = Math.floor((duration)/60)
-    let second = Math.floor((duration) % 60)
-    let seconds = ('0' + second).slice(-2)
-    let strDuration = `${minutes}:${seconds}`
-    console.log(strDuration)
-    // this.setState({vidDuration: strDuration})
-    let {url, user_id, category, title, video_desc, thumbnail} = this.state
-    axios.post('/api/upload', {url, user_id, category, title, video_desc, thumbnail, strDuration})
-        .then( () => console.log('successfully saved video info to db'))
-        .catch( err => console.log(err))
+    if(!duration){
+      Swal ({
+        type: 'warning',
+        title: 'Oops...',
+        text: 'Be patient young padawan, your video is still uploading.',
+      })
+    } else {
+      let minutes = Math.floor((duration)/60)
+      let second = Math.floor((duration) % 60)
+      let seconds = ('0' + second).slice(-2)
+      let strDuration = `${minutes}:${seconds}`
+      console.log(strDuration)
+      // this.setState({vidDuration: strDuration})
+      let {url, user_id, category, title, video_desc, thumbnail} = this.state
+      axios.post('/api/upload', {url, user_id, category, title, video_desc, thumbnail, strDuration})
+          .then( () => {
+            console.log('successfully saved video info to db')
+            this.props.history.push("/channel")
+          })
+          .catch( err => console.log(err))
+    }
     event.preventDefault();
   }
 
