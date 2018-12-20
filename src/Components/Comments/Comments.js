@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Comments.css';
-import axios from 'axios'
+import axios from 'axios';
 
 
 class Comments extends Component {
@@ -34,7 +34,7 @@ class Comments extends Component {
         document.cookie = `redirecturl=${this.props.match};`
         window.location = `https://${REACT_APP_DOMAIN}/authorize?client_id=${REACT_APP_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${uri}&response_type=code`
     }
-    getComments = () => {
+    getComments() {
         axios.get(`/api/comments/${this.props.video_id}`).then(res => {
             // axios.get(`/api/userinfo`).then(res => {
             this.setState({
@@ -65,7 +65,7 @@ class Comments extends Component {
     }
     deleteComment(comment_id, user_id) {
         console.log(comment_id, user_id)
-        axios.delete(`/api/deletecomment/${comment_id}/${user_id}/${this.props.video_id}`).then(res=>{
+        axios.delete(`/api/deletecomment/${comment_id}/${user_id}/${this.props.video_id}`).then(res => {
             this.setState({
                 comments: res.data
             })
