@@ -144,7 +144,7 @@ module.exports = {
             })
     },
     getUser: (req, res) => {
-        res.send(req.session.user)
+        res.status(200).send(req.session.user)
     },
     searchVideos: (req, res) => {
         const db = req.app.get('db')
