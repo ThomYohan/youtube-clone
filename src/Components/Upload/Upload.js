@@ -6,6 +6,7 @@ import Dropzone from 'react-dropzone';
 import { GridLoader } from 'react-spinners';
 import uTubeUpload3 from '../../images/uTubeUpload3.png';
 import Swal from 'sweetalert2';
+import {getDuration} from '../Logic/Logic';
 
 class Upload extends Component {
   constructor() {
@@ -114,10 +115,11 @@ class Upload extends Component {
         text: 'Be patient young padawan, your video is still uploading.',
       })
     } else {
-      let minutes = Math.floor((duration)/60)
-      let second = Math.floor((duration) % 60)
-      let seconds = ('0' + second).slice(-2)
-      let strDuration = `${minutes}:${seconds}`
+      let strDuration = getDuration(duration)
+      // let minutes = Math.floor((duration) / 60)
+      // let second = Math.floor((duration) % 60)
+      // let seconds = ('0' + second).slice(-2)
+      // let strDuration = `${minutes}:${seconds}`
       console.log(strDuration)
       // this.setState({vidDuration: strDuration})
       let {url, user_id, category, title, video_desc, thumbnail} = this.state

@@ -28,3 +28,15 @@ export function videoDisplay(video){
     }
     return user
 }
+
+export function getDuration(value){
+    let strDuration = ``
+    let minutes = 0
+    let seconds = 0
+    if(value){
+        seconds = ('0' + (value % 60)).slice(-2)
+        minutes = Math.floor(value / 60)
+        strDuration = `${minutes}:${seconds}`
+    }
+    return strDuration
+}

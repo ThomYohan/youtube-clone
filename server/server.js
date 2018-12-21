@@ -113,15 +113,18 @@ app.get('/api/comments/:video_id', controller.getComments)
 app.get('/api/get-likes/:id', controller.getLikes)
 app.get('/api/get-dislikes/:id', controller.getDislikes)
 app.get('/api/userinfo', controller.getUser)
-app.post('/api/search', controller.searchVideos)
-app.post('/api/createcomment', controller.createComment)
 app.get('/api/search', controller.searchVideos)
 app.get('/api/userinfo', controller.getUser)
+
+app.post('/api/search', controller.searchVideos)
+app.post('/api/createcomment', controller.createComment)
 app.post('/api/like-dislike', controller.like_dislike)
 app.post('/api/upload', controller.upload)
 app.post('/api/auth/signout', controller.signout)
+
 app.put('/api/channel-name', controller.updateChannel)
 app.put('/api/view-count', controller.viewCount)
+
 app.delete('/api/deletecomment/:comment_id/:user_id/:video_id', controller.deleteComment)
 app.delete('/api/delete/:video_id', controller.deleteVideo)
 
