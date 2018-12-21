@@ -14,6 +14,21 @@ export function disable(value) {
     return value
 }
 
+export function videoDisplay(video){
+    let user = ''
+    if(video === undefined){
+        user = ''
+    } else if(video.channel_name){
+        user = video.channel_name
+    } else if(!video.first_name){
+        user = 'Unkown'
+    }
+    else {
+        user = `${video.first_name} ${video.last_name}`
+    }
+    return user
+}
+
 export function getDuration(value){
     let strDuration = ``
     let minutes = 0
