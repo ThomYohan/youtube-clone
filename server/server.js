@@ -54,8 +54,8 @@ app.get('/auth/callback', async (req, res) => {
 
     let { email, picture, sub, name } = userRes.data;
     let userName = name.split(' ')
-        let firstName = userName[0]
-        let lastName = userName[1]
+    let firstName = userName[0]
+    let lastName = userName[1]
     // check if that user already exists in our db
     const db = app.get('db');
     let foundCustomer = await db.find_user([sub]);
