@@ -5,6 +5,7 @@ import pic from './icons8-search-24.png'
 import pic2 from './add video.svg'
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import {inputCheck} from '../Logic/Logic';
 
 
 class Nav extends Component {
@@ -43,9 +44,8 @@ class Nav extends Component {
 
     handleSearch = (e) => {
         this.setState({
-            searchField: e.target.value
-        })
-        
+            searchField: inputCheck(e.target.value)
+        })   
     }
 
 
