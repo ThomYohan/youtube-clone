@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './Home.css';
 import {Link} from 'react-router-dom';
+import {videoDisplay} from '../Logic/Logic'
 
 class Home extends Component {
     constructor(){
@@ -44,12 +45,7 @@ class Home extends Component {
     render(){
         
         let videosDisplay = this.state.videos.map((video, i) => {
-            let user = ''
-            if(video.channel_name){
-                user = video.channel_name
-            } else {
-                user = `${video.first_name} ${video.last_name}`
-            }
+            let user = videoDisplay(video)
             return (
                 <div className="videoz" key={i}>
                     <Link to={`/video/${video.video_id}`}><video id="thumbnail" src={video.video_url}></video>

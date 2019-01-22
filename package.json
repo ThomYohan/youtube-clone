@@ -43,5 +43,10 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "main": "server/server.js"
+  "main": "server/server.js",
+  "devDependencies": {
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "jest-transform-stub": "^1.0.0"
+  }
 }

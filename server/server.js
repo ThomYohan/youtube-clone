@@ -18,12 +18,13 @@ const {
     CLIENT_SECRET,
     CONNECTION_STRING,
     SECRET,
-    AUTH_PROTOCAL,
+    AUTH_PROTOCOL,
     AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY,
     AWS_REGION,
     S3_BUCKET
 } = process.env;
+
 
 massive(CONNECTION_STRING).then(db => app.set('db', db))
 
@@ -42,9 +43,8 @@ app.get('/auth/callback', async (req, res) => {
         client_secret: CLIENT_SECRET,
         code: req.query.code,
         grant_type: 'authorization_code',
-        redirect_uri: `${AUTH_PROTOCAL}://${req.headers.host}/auth/callback`
+        redirect_uri: `${AUTH_PROTOCOL}://${req.headers.host}/auth/callback`
     }
-
 
     // auth0 sending code in req.query.code
     let tokenRes = await axios.post(`https://${REACT_APP_DOMAIN}/oauth/token`, payload)
@@ -54,8 +54,8 @@ app.get('/auth/callback', async (req, res) => {
 
     let { email, picture, sub, name } = userRes.data;
     let userName = name.split(' ')
-        let firstName = userName[0]
-        let lastName = userName[1]
+    let firstName = userName[0]
+    let lastName = userName[1]
     // check if that user already exists in our db
     const db = app.get('db');
     let foundCustomer = await db.find_user([sub]);
@@ -113,15 +113,18 @@ app.get('/api/comments/:video_id', controller.getComments)
 app.get('/api/get-likes/:id', controller.getLikes)
 app.get('/api/get-dislikes/:id', controller.getDislikes)
 app.get('/api/userinfo', controller.getUser)
-app.post('/api/search', controller.searchVideos)
-app.post('/api/createcomment', controller.createComment)
 app.get('/api/search', controller.searchVideos)
 app.get('/api/userinfo', controller.getUser)
+
+app.post('/api/search', controller.searchVideos)
+app.post('/api/createcomment', controller.createComment)
 app.post('/api/like-dislike', controller.like_dislike)
 app.post('/api/upload', controller.upload)
 app.post('/api/auth/signout', controller.signout)
+
 app.put('/api/channel-name', controller.updateChannel)
 app.put('/api/view-count', controller.viewCount)
+
 app.delete('/api/deletecomment/:comment_id/:user_id/:video_id', controller.deleteComment)
 app.delete('/api/delete/:video_id', controller.deleteVideo)
 
