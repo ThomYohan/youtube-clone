@@ -48,8 +48,9 @@ class Home extends Component {
             let user = videoDisplay(video)
             return (
                 <div className="videoz" key={i}>
-                    <Link to={`/video/${video.video_id}`}><video id="thumbnail" src={video.video_url}></video></Link>
+                    <Link to={`/video/${video.video_id}`}><video id="thumbnail" src={video.video_url}></video>
                     <h4>{video.title}</h4>
+                    </Link>
                     <p id="vid-author">{user}</p>
                     <p id="view-count">{video.view_count} views</p>
                     <p id="vid-duration">{video.duration}</p>

@@ -19,7 +19,7 @@ describe('Tests disable on click', () => {
     })
     test('non-boolean should return undefined', ()=>{
         expect(disable(info)).toBe(undefined)
-    })
+    }) 
 })
 
 

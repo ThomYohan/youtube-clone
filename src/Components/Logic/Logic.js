@@ -40,3 +40,17 @@ export function getDuration(value){
     }
     return strDuration
 }
+
+export function inputCheck(value) {
+    if(value === '') {
+        return ''
+    } else if (typeof(value) === 'string') {
+        return value
+    } else if (value === undefined) {
+        return undefined
+    } else if (value === null) {
+        return null
+    }        
+}
+
+

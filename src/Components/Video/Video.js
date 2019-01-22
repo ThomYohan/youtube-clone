@@ -23,7 +23,9 @@ class Video extends Component {
             signedIn: false,
             userInfo: {},
             viewed: false,
-            duration: 0
+            duration: 0,
+            likedVideo: true,
+            dislikedVideo: false
         }
         this.addView = this.addView.bind(this)
     }
@@ -101,8 +103,9 @@ class Video extends Component {
             })
         } else {
             axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                console.log(1, res)
                 this.getLikes()
-                this.getDislikes()
+                this.getDislikes()       
             })
         }
     }
@@ -119,6 +122,7 @@ class Video extends Component {
             })
         } else {
             axios.post(`/api/like-dislike`, {video_id, likeDislike}).then(res => {
+                console.log(2, res)
                 this.getLikes()
                 this.getDislikes()
             })
@@ -167,7 +171,7 @@ class Video extends Component {
                         <span><p id="xxxx">{this.state.viewCount} views</p></span>
                         <div className="likes">
                             <div className="likebox">
-                                <button onClick={this.likeVideo} id="like-button"><img src={pic2} alt="" /></button>
+                                <button onClick={this.likeVideo} id="like-button"> <img src={pic2} alt="" /></button>
                                 <p>{this.state.likeCount}</p>
                             </div>
                             <div className="dislikebox">

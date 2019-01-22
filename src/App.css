@@ -26,6 +26,7 @@ footer, header, hgroup, menu, nav, section {
 }
 button {
 	background: none;
+
 }
 button:focus{
 	outline: none;
